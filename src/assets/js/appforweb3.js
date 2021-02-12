@@ -84,6 +84,36 @@ App = {
       window.alert(role);
       if(role=="1"){
         //HealthCare
+        var hospitalId=0;
+        //Load Health Provider Details
+        var hospitalcount=await App.healthcare.hospitalCount();
+        //window.alert(hospitalcount);
+        for (var i = 1; i <= hospitalcount; i++) {
+          var hospital=await App.healthcare.hospitals(i);
+         // window.alert(hospital.name);
+          console.log(hospital);
+          var hospitaladdress=hospital.addr;
+          if(hospitaladdress.toUpperCase().localeCompare(App.account.toUpperCase())==0){
+            var hospitalName=hospital.name;
+            var hospitalRegID=hospital.regId;
+            var hospitalDescription=hospital.description;
+           // window.alert(hospitalName);
+            $("#hospitalname1").html(hospitalName);
+            $("#hospitalRegID").html(hospitalRegID);
+            $("#hospitalDescription").html(hospitalDescription);
+            hospitalId=i;
+            break;
+          }
+        }
+        //Load Doctors work on this hospital
+        var doctorcount=await App.healthcare.doctorCount();
+        for (var i = 1; i <= doctorcount; i++) {
+          var doctor=await App.healthcare.doctors(i);
+          if(doctor.hospitalid==hospitalId){
+            //this doctor works on this hospitals
+            window.alert("doctor="+doctor.name);
+          }
+        }
         home.hide();
         selectUserForRegistration.hide();
         addhospital.hide();
