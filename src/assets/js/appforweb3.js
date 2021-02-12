@@ -81,6 +81,7 @@ App = {
       //var loader = $("#loader");
       
       var role=await App.healthcare.roles(App.account); 
+      window.alert(role);
       if(role=="1"){
         //HealthCare
         home.hide();
@@ -187,11 +188,14 @@ App = {
     await App.render();
   },
   addPatient:async()=>{    
-    var insuName=$("#insuName").val();
-    var insuRegId=$("#insuRegId").val();
-    var gender = $("input[name='gender']:checked").val();
+    var patFName=$("#patFName").val();
+    var patLName=$("#patLName").val();
+    var patFullname=patFName+" "+patLName;
+    var insuranceProviderSelect=$("#insuranceProviderSelect").val();
+    var doctorSelect=$("#doctorSelect").val();
+    //var gender = $("input[name='gender']:checked").val();
     //window.alert(insuName +insuRegId );
-    await App.healthcare.registerInsuranceProvider(insuName,insuRegId,"false", { from: App.account }); 
+    await App.healthcare.registerPatient(patFullname,parseInt(insuranceProviderSelect),parseInt(doctorSelect),"false", { from: App.account }); 
     //.alert("added successfully"); 
     await App.render();
   },
@@ -247,7 +251,32 @@ App = {
     }
     if(RoleSelect=="3"){
       //add Patient page show
-      home.hide();
+      //Load all Insurance Providers Registered
+      var insuranceProviderSelect=$("#insuranceProviderSelect");    
+      insuranceProviderSelect.empty();
+      var count= await App.healthcare.insuranceCount();
+      for (var i = 1; i <= count; i++) {
+        //console.log("Check select option"+i);
+        var insurance=await App.healthcare.insuranceproviders(i);
+        var insurancename=insurance[2];
+        var insuranceid=insurance[0];
+        var str = "<option value='" + insuranceid + "' >" + insurancename + "</ option>";
+        insuranceProviderSelect.append(str);
+      }
+    //Load all Doctors Registered
+      var doctorSelect=$("#doctorSelect");    
+      doctorSelect.empty();
+      var count= await App.healthcare.doctorCount();
+      for (var i = 1; i <= count; i++) {
+        //console.log("Check select option"+i);
+        var doctor=await App.healthcare.doctors(i);
+        var doctorname=doctor[2];
+        var doctorid=doctor[0];
+        var str = "<option value='" + doctorid + "' >" + doctorname + "</ option>";
+        doctorSelect.append(str);
+      }
+
+        home.hide();
         selectUserForRegistration.hide();
         addhospital.hide();
         addDoctor.hide();
