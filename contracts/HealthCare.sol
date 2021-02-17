@@ -11,19 +11,10 @@ contract HealthCare {
     uint id;
     address addr;
     string name;
-    string regId;
-    //string website;
-    //string phone;
-    //string email;
-    //string hosaddress;
-    //string country;
-    //string state;
-    //string city;
-    //string postalcode;
-    //string openingTime;
-    //string closingTime;
+    string regId;    
     string description;
     string _approved;
+    string extrafields;
   }
   mapping(uint => Hospital) public hospitals;
   struct Doctor {
@@ -33,6 +24,7 @@ contract HealthCare {
     uint hospitalid;
     string regId;   
     string _approved;
+    string extrafields;
   }
   mapping(uint => Doctor) public doctors;
   struct InsuranceProvider {
@@ -41,8 +33,9 @@ contract HealthCare {
     string name;    
     string regId;   
     string _approved;
+    string extrafields;
   }
-  mapping(uint => InsuranceProvider) public insuranceproviders;
+  mapping(uint => InsuranceProvider) public ;
   struct Patient {
     uint id;
     address addr;
@@ -50,36 +43,45 @@ contract HealthCare {
     uint insuranceProviderid;   
     uint familyDoctorid; 
     string _approved;
+    string extrafields;
   }
   mapping(uint => Patient) public patients;
+  struct Appointment {
+    uint id;       
+    uint patientid;   
+    uint doctorid;     
+    string date; 
+    string time;   
+  }
+  mapping(uint => Appointment) public appointments;
   constructor() public {  
     admin=msg.sender;    
   }
-  function registerHospital (string memory _name,string memory _regId,string memory _description,string memory _approved) public {
+  function registerHospital (string memory _name,string memory _regId,string memory _description,string memory _approved,string memory _extrafields) public {
         require(bytes(roles[msg.sender]).length==0);
         hospitalCount ++;
-        hospitals[hospitalCount] = Hospital(hospitalCount,msg.sender,_name,_regId,_description,_approved);    
+        hospitals[hospitalCount] = Hospital(hospitalCount,msg.sender,_name,_regId,_description,_approved,_extrafields);    
         roles[msg.sender]="1";   
         //emit registeredEvent(msg.sender);
     } 
-  function registerDoctor (string memory _name,uint _hospitalId,string memory _regId,string memory _approved) public {
+  function registerDoctor (string memory _name,uint _hospitalId,string memory _regId,string memory _approved,string memory _extrafields) public {
         require(bytes(roles[msg.sender]).length==0);
         doctorCount ++;
-        doctors[doctorCount] = Doctor(doctorCount,msg.sender,_name,_hospitalId,_regId,_approved);    
+        doctors[doctorCount] = Doctor(doctorCount,msg.sender,_name,_hospitalId,_regId,_approved,_extrafields);    
         roles[msg.sender]="2";   
         //emit registeredEvent(msg.sender);
     } 
-     function registerPatient (string memory _name,uint _insuranceProviderId,uint _familyDoctorId,string memory _approved) public {
+     function registerPatient (string memory _name,uint _insuranceProviderId,uint _familyDoctorId,string memory _approved,string memory _extrafields) public {
         require(bytes(roles[msg.sender]).length==0);
         patientCount ++;
-        patients[patientCount] = Patient(patientCount,msg.sender,_name,_insuranceProviderId,_familyDoctorId,_approved);    
+        patients[patientCount] = Patient(patientCount,msg.sender,_name,_insuranceProviderId,_familyDoctorId,_approved,_extrafields);    
         roles[msg.sender]="3";   
         //emit registeredEvent(msg.sender);
     } 
-    function registerInsuranceProvider (string memory _name,string memory _regId,string memory _approved) public {
+    function registerInsuranceProvider (string memory _name,string memory _regId,string memory _approved,string memory _extrafields) public {
         require(bytes(roles[msg.sender]).length==0);
         insuranceCount ++;
-        insuranceproviders[insuranceCount] = InsuranceProvider(doctorCount,msg.sender,_name,_regId,_approved);    
+        insuranceproviders[insuranceCount] = InsuranceProvider(doctorCount,msg.sender,_name,_regId,_approved,_extrafields);    
         roles[msg.sender]="4";   
         //emit registeredEvent(msg.sender);
     } 
