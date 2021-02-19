@@ -6,6 +6,8 @@ contract HealthCare {
   uint public doctorCount = 0;
   uint public insuranceCount = 0;
   uint public patientCount = 0;
+  uint public appointmentCount = 0;
+  uint public fileSharingCount = 0;
   address public admin; 
   struct Hospital {
     uint id;
@@ -35,7 +37,7 @@ contract HealthCare {
     string _approved;
     string extrafields;
   }
-  mapping(uint => InsuranceProvider) public ;
+  mapping(uint => InsuranceProvider) public insuranceproviders ;
   struct Patient {
     uint id;
     address addr;
@@ -44,6 +46,7 @@ contract HealthCare {
     uint familyDoctorid; 
     string _approved;
     string extrafields;
+    string filehashes;
   }
   mapping(uint => Patient) public patients;
   struct Appointment {
@@ -54,6 +57,13 @@ contract HealthCare {
     string time;   
   }
   mapping(uint => Appointment) public appointments;
+  struct FileSharing {
+    uint id;       
+    uint patientid;   
+    uint doctorid;     
+    string filehash;      
+  }
+  mapping(uint => FileSharing) public filesharings;
   constructor() public {  
     admin=msg.sender;    
   }
@@ -71,10 +81,10 @@ contract HealthCare {
         roles[msg.sender]="2";   
         //emit registeredEvent(msg.sender);
     } 
-     function registerPatient (string memory _name,uint _insuranceProviderId,uint _familyDoctorId,string memory _approved,string memory _extrafields) public {
+     function registerPatient (string memory _name,uint _insuranceProviderId,uint _familyDoctorId,string memory _approved,string memory _extrafields,string memory _filehashes) public {
         require(bytes(roles[msg.sender]).length==0);
         patientCount ++;
-        patients[patientCount] = Patient(patientCount,msg.sender,_name,_insuranceProviderId,_familyDoctorId,_approved,_extrafields);    
+        patients[patientCount] = Patient(patientCount,msg.sender,_name,_insuranceProviderId,_familyDoctorId,_approved,_extrafields,_filehashes);    
         roles[msg.sender]="3";   
         //emit registeredEvent(msg.sender);
     } 
@@ -83,6 +93,20 @@ contract HealthCare {
         insuranceCount ++;
         insuranceproviders[insuranceCount] = InsuranceProvider(doctorCount,msg.sender,_name,_regId,_approved,_extrafields);    
         roles[msg.sender]="4";   
+        //emit registeredEvent(msg.sender);
+    } 
+    function addAppointment (uint _patientid,uint _doctorid,string memory _date,string memory _time ) public {
+        //require(bytes(roles[msg.sender]).length==0);
+        appointmentCount ++;
+        appointments[appointmentCount] = Appointment(appointmentCount,_patientid,_doctorid,_date,_time);    
+        
+        //emit registeredEvent(msg.sender);
+    } 
+    function addFileSharing (uint _patientid,uint _doctorid,string memory _filehash ) public {
+        //require(bytes(roles[msg.sender]).length==0);
+        fileSharingCount ++;
+        filesharings[fileSharingCount] = FileSharing(fileSharingCount,_patientid,_doctorid,_filehash);    
+        
         //emit registeredEvent(msg.sender);
     } 
 }

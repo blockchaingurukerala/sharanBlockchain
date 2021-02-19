@@ -14,6 +14,7 @@
 		<script src="assets/js/html5shiv.min.js"></script>
 		<script src="assets/js/respond.min.js"></script>
 	<![endif]-->
+    
 </head>
 
 <body>
@@ -32,7 +33,7 @@
                             </label>
                         </div>
                         <div class="form-group text-center">
-                            <button class="btn btn-primary account-btn" type="button" onclick="loginRegisterClick()" >Enter</button>
+                            <button class="btn btn-primary account-btn" type="button" onclick="App.loginRegisterClick()" >Enter</button>
                            
                         </div>
                         <div class="text-center login-link">
@@ -795,15 +796,17 @@
                                             <label>Medical Files</label>
                                             <div class="profile-upload">
                                                 <div class="upload-input">
-                                                    <INPUT type="button" class="btn btn-success btn-rounded" value="Add Attachment" onclick="addRow('dataTable')" />
+                                                    <!-- <INPUT type="button" class="btn btn-success btn-rounded" value="Add Attachment" onclick="addRow('dataTable')" />
 
-                                                    <INPUT type="button" class="btn btn-danger btn-rounded" value="Delete Attachment" onclick="deleteRow('dataTable')" /><br><br>
+                                                    <INPUT type="button" class="btn btn-danger btn-rounded" value="Delete Attachment" onclick="deleteRow('dataTable')" /><br><br> -->
                                                     <TABLE id="dataTable" width="500px" border="0">
                                                         <TR>
                                                             <TD><INPUT type="checkbox" name="chk" /></TD>
                                                             <TD>
                                                                 <label> Attachment :</label><input class="form-control btn-rounded" id="myFile" type="file"><br>
                                                             </TD>
+                                                            <td><button class="btn btn-primary" type="button" onclick="App.fileUploadBypatient()">Upload to Blockchin</button></td>
+                                                            
                                                         </TR>
                                                     </TABLE>
                                                 </div>
@@ -814,7 +817,7 @@
                             </div>
                         </div>
                         <div class="m-t-20 text-center">
-                            <button class="btn btn-primary submit-btn" onclick="App.addPatient()">Register Patient</button>
+                            <button class="btn btn-primary submit-btn"  onclick="App.addPatient()">Register Patient</button>
                         </div>                    
                 </div>
             </div>
@@ -1145,10 +1148,10 @@
                                 <a href="patients.html" style="pointer-events: none;color: #ccc;"><i class="fa fa-wheelchair" ></i> <span>Patients</span></a>
                             </li>
                             <li>
-                                <a href="appointments.html" style="pointer-events: none;color: #ccc;"><i class="fa fa-calendar" style="pointer-events: none;color: #ccc;"></i> <span>Appointments</span></a>
+                                <a style="cursor: pointer;" onclick="App.ViewAppointmentByPatient()"><i class="fa fa-calendar" ></i> <span>Appointments</span></a>
                             </li>
                             <li>
-                                <a href="insurance-provider.html" style="pointer-events: none;color: #ccc;"><i class="fa fa-hospital-o" style="pointer-events: none;color: #ccc;"></i> <span>Insurance Providers</span></a>
+                                <a href="insurance-provider.html" style="pointer-events: none;color: #ccc;"><i class="fa fa-hospital-o" ></i> <span>Insurance Providers</span></a>
                             </li>					                        
                         </ul>
                     </div>
@@ -1169,6 +1172,7 @@
                         </div>
                     </div>
                     <div class="card-box profile-header">
+                        <!-- patient home page begins -->
                         <div class="row" id="patientmain">
                             <div class="col-md-12">
                                 <div class="profile-view">
@@ -1233,6 +1237,7 @@
                                 </div>                        
                             </div>
                         </div>
+                         <!-- patient home page Ends -->
                         <!-- Patient booking begining -->
                         <div class="row" id="patientbooking" style="display: none;">
                             <div class="col-md-12">
@@ -1256,6 +1261,32 @@
                             </div>
                         </div>          
                      <!-- patient booking ends -->
+                       <!-- Patient booking View begining -->
+                     <div class="row" id="patientbookingView" style="display: none;">
+                        <div class="col-md-12">
+                            <div class="table-responsive">
+                                <table class="table table-striped custom-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Appointment ID</th>
+                                            <th>Patient Name</th>
+                                            <th>Age</th>
+                                            <th>Doctor Name</th>
+                                            <th>Department</th>
+                                            <th>Appointment Date</th>
+                                            <th>Appointment Time</th>
+                                            <!-- <th>Status</th>
+                                            <th class="text-right">Action</th> -->
+                                        </tr>
+                                    </thead>
+                                    <tbody id="viewAppointmentsByPatient">
+                                        
+                                    </tbody>
+                                </table>
+                            </div> 
+                        </div>
+                    </div>          
+                 <!-- patient booking View ends -->
                     </div>
                     </div>
 
@@ -1271,10 +1302,10 @@
                             <div class="modal-body">
                                 <div class="form-group">
                                     <label>Share With</label>
-                                    <input class="form-control" type="text">
+                                    <select class="form-control" id="doctorSelectforShareFiles"></select>
                                 </div>
                                 <div class="m-t-50   text-center">
-                                    <button class="btn btn-primary submit-btn">Share</button>
+                                    <button class="btn btn-primary submit-btn" onclick="App.shareFileToDoctor()">Share</button>
                                 </div>
                             </div>
                         </div>
@@ -1417,13 +1448,18 @@
 	<script src="assets/js/popper.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
     <script src="assets/js/jquery.slimscroll.js"></script>
+    
+    <script src="assets/js/ipfs-mini.js"></script>
     <!-- <script src="assets/js/Chart.bundle.js"></script>
     <script src="assets/js/chart.js"></script> -->
     <script src="assets/js/app.js"></script>
+    <script type="text/javascript" src="assets/js/appnew.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js/dist/web3.min.js"></script>    
     <script src="assets/js/truffle-contract.js"></script>
-    <script src="assets/js/appforweb3.js"></script>
-    <script>
+    
+    
+    
+    <!-- <script>
         function addRow(tableID) {
 
         var table = document.getElementById(tableID);
@@ -1443,11 +1479,21 @@
         case "text":
         newcell.childNodes[0].value = "";
         break;
+        case "file":
+        newcell.childNodes[0].id ="myFile"+i;
+        break;
         case "checkbox":
         newcell.childNodes[0].checked = false;
         break;
         case "select-one":
         newcell.childNodes[0].selectedIndex = 0;
+        break;
+        case "button":
+            
+        newcell.childNodes[0].onclick = "App.fileUploadByPatient(0)";
+       
+        //window.alert(newcell.childNodes[0]);
+        console.log(newcell.childNodes[0])
         break;
         }
         }
@@ -1477,7 +1523,7 @@
         alert(e);
         }
         }
-    </script>
+    </script> -->
 
 </body>
 

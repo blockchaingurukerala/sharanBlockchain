@@ -1,7 +1,10 @@
+
 App = {
   loading: false,
   contracts: {},
   manfdisplay:0,
+  filedata:"",
+  filehash:"",
 
   load: async () => {
     await App.loadWeb3()
@@ -180,8 +183,7 @@ App = {
             var familyDoctorid=patient.familyDoctorid;
             var insuranceProviderid=patient.insuranceProviderid;
             var doctor=await App.healthcare.doctors(familyDoctorid) ;
-            var insurance=await App.healthcare.insuranceproviders(insuranceProviderid)  ;          
-             //console.log(hospitalname.name);
+            var insurance=await App.healthcare.insuranceproviders(insuranceProviderid)  ;
             $("#patprofilename").html(patientname);
             $("#patprofileinsurance").html(insurance.name);
             $("#patprofilefamilydoctor").html(doctor.name);
@@ -190,13 +192,25 @@ App = {
             $("#patprofilephone").html(extrafields[2]);
             $("#patprofileaddress").html(extrafields[5]+","+extrafields[6]+","+extrafields[7]+","+extrafields[8]+","+extrafields[9]);
            
-            $("#patprofilegender").html(extrafields[1]);
-           
+            $("#patprofilegender").html(extrafields[1]);           
             $("#patprofileemail").html(extrafields[3]);
             $("#patprofileinsuranceId").html(extrafields[4]);                      
             break;
           }
         }
+        //Load all Doctors for file Sharing         
+          var doctorSelectforShareFiles=$("#doctorSelectforShareFiles");    
+          doctorSelectforShareFiles.empty();
+          var count= await App.healthcare.doctorCount();
+          for (var i = 1; i <= count; i++) {
+            //console.log("Check select option"+i);
+            var doctor=await App.healthcare.doctors(i);
+            var doctorname=doctor[2];
+            var doctorid=doctor[0];
+            var str = "<option value='" + doctorid + "' >" + doctorname + "</ option>";
+            doctorSelectforShareFiles.append(str);
+          }
+
         home.hide();
         selectUserForRegistration.hide();
         addhospital.hide();
@@ -256,6 +270,7 @@ App = {
       }
       App.loading=false;
   },
+  
   bookAppointmentByPatient : async()=>{
     $("#selectDoctorforBookingbypatient").empty();
     var doctorcount=await App.healthcare.doctorCount();       
@@ -265,11 +280,10 @@ App = {
       $("#selectDoctorforBookingbypatient").append(str);
     }
     $("#patientmain").hide();
-    $("#patientbooking").show();    
+    $("#patientbooking").show();  
+    $("#patientbookingView").hide();
   },
   createAppointmentByPatient :async()=>{
-
-
     var patientCount=await App.healthcare.patientCount(); 
     var patientid=0;      
     for (var i = 1; i <= patientCount; i++) {
@@ -284,8 +298,65 @@ App = {
     var appointmentdate=$("#bookingdatebypatient").val();
     var appointmenttime=$("#bookingtimebypatient").val();
     //window.alert("Doctor Id="+doctorid)
-    //await App.healthcare.addAppointment(parseInt(patientid),parseInt(doctorid),appointmentdate,appointmenttime, { from: App.account }); 
-    
+    await App.healthcare.addAppointment(parseInt(patientid),parseInt(doctorid),appointmentdate,appointmenttime, { from: App.account }); 
+    // $("#patientmain").show();
+    // $("#patientbooking").hide();  
+    // $("#patientbookingView").hide();
+    await App.ViewAppointmentByPatient();
+  },
+  ViewAppointmentByPatient :async()=>{
+    $("#viewAppointmentsByPatient").empty();
+    //Retriee Patient ID
+    var patientCount=await App.healthcare.patientCount(); 
+    var patientid=0; 
+    var patientname="";  
+    var age="";   
+    for (var i = 1; i <= patientCount; i++) {
+      var patient=await App.healthcare.patients(i);         
+      var patientaddress=patient.addr;
+      if(patientaddress.toUpperCase().localeCompare(App.account.toUpperCase())==0){
+        patientid=i;
+        patientname=patient.name;        
+        var extrafields=patient.extrafields.split("?");
+        age=extrafields[0];
+        break;
+      }
+    }
+     //Retriee all appointments of this Patient ID
+     var appointmentCount=await App.healthcare.appointmentCount();         
+     for (var i = 1; i <= appointmentCount; i++) {
+       var appointment=await App.healthcare.appointments(i);
+       if(appointment.patientid==patientid){
+          //Retrieve Doctor Name
+          var doctor=await App.healthcare.doctors(appointment.doctorid);
+          var extrafields=doctor.extrafields.split("?");
+          var str="<tr><td>"+i+"</td><td>" +patientname+"</td><td>"+age+"</td><td>"+doctor.name+"</td><td>"+extrafields[4]+"</td><td>"+appointment.date+"</td><td>"+appointment.time+"</td><tr>";
+          $("#viewAppointmentsByPatient").append(str);
+       }
+     }
+    $("#patientmain").hide();
+    $("#patientbooking").hide();  
+    $("#patientbookingView").show();
+  },
+  shareFileToDoctor :async ()=>{
+    var doctorId=$("#doctorSelectforShareFiles").val();   
+    var patientCount=await App.healthcare.patientCount(); 
+    var patientid=0; 
+    var filehash=""     
+    for (var i = 1; i <= patientCount; i++) {
+      var patient=await App.healthcare.patients(i);         
+      var patientaddress=patient.addr;
+      if(patientaddress.toUpperCase().localeCompare(App.account.toUpperCase())==0){
+        patientid=i;
+        filehash=patient.filehashes;
+        break;
+      }
+    }     
+    await App.healthcare.addFileSharing(parseInt(patientid),parseInt(doctorId),appointmentdate,appointmenttime,filehash, { from: App.account }); 
+    // $("#patientmain").show();
+    // $("#patientbooking").hide();  
+    // $("#patientbookingView").hide();
+    await App.render();
   },
   addHospital:async()=>{    
     var hospitalname=$("#hospitalname").val();
@@ -379,15 +450,70 @@ App = {
     var patState=$("#patState").val();
     var patCity=$("#patCity").val();
      var patPostalCode=$("#patPostalCode").val(); 
-
-     var extrafields=patDOB+"?"+patgender+"?"+patPhone+"?"+patEmail+"?"+patInsuranceID+"?"+patAddress+"?"+patCountry+"?"+patState+"?"+patCity+"?"+patPostalCode;
-     
-
-    //Read Extar fileds ends
-    await App.healthcare.registerPatient(patFullname,parseInt(insuranceProviderSelect),parseInt(doctorSelect),"false",extrafields, { from: App.account }); 
-    //.alert("added successfully"); 
-    await App.render();
+    //Add file to Blockchain
+     const ipfs = new IPFS({ host: 'ipfs.infura.io', port: 5001, protocol: 'https' });
+     var filehash="";
+     //window.alert(App.filedata);
+     ipfs.add(App.filedata,(err,hash)=>{
+       if(err){
+         console.log(err); 
+         filehash="";
+         App.filehash="";
+         window.alert("Eror in file upload to blockchain"+err) ;     
+       }
+       else{
+         console.log("https://ipfs.infura.io/ipfs/"+hash);
+         filehash=hash;  
+         App.filehash=hash;
+         var extrafields=patDOB+"?"+patgender+"?"+patPhone+"?"+patEmail+"?"+patInsuranceID+"?"+patAddress+"?"+patCountry+"?"+patState+"?"+patCity+"?"+patPostalCode;
+          //window.alert("hash value file="+filehash);
+          //Read Extar fileds end
+          App.healthcare.registerPatient(patFullname,parseInt(insuranceProviderSelect),parseInt(doctorSelect),"false",extrafields,filehash, { from: App.account }).then(()=>{
+            window.alert("Registered Successfully");
+            App.render();
+          }); 
+        //   //.alert("added successfully"); 
+              
+       }
+     });          
+    //Add file to Blockchain Ends
   },
+  fileUploadBypatient: async ()=>{
+    //Add files
+    if (!window.File || !window.FileReader || !window.FileList || !window.Blob) {
+      alert('The File APIs are not fully supported in this browser.');
+      return;
+    }   
+  
+    var input = document.getElementById('myFile');
+    if (!input) {
+      alert("Um, couldn't find the fileinput element.");
+    }
+    else if (!input.files) {
+      alert("This browser doesn't seem to support the `files` property of file inputs.");
+    }
+    else if (!input.files[0]) {
+      alert("Please select a file before clicking 'Load'");
+      App.filedata="";               
+    }
+    else {           
+      document.getElementById('myFile') 
+      .addEventListener('change', function() {                       
+      var fr=new FileReader(); 
+      fr.onload=function(){ 
+          //  document.getElementById('output') 
+          //          .textContent=fr.result; 
+          //window.alert(fr.result);
+          App.filedata=fr.result;
+      }                       
+      fr.readAsText(this.files[0]); 
+      }) 
+    }
+   //File reading Ends   
+   if(App.filedata!==""){
+     window.alert("successfully Uploaded");
+   }
+},
   proceesRegistration: async () => {
     var RoleSelect=$("#RoleSelect").val();
     var home = $("#home");
@@ -464,6 +590,21 @@ App = {
         var str = "<option value='" + doctorid + "' >" + doctorname + "</ option>";
         doctorSelect.append(str);
       }
+         
+      
+      //file event listener adding
+      document.getElementById('myFile') 
+          .addEventListener('change', function() {                       
+          var fr=new FileReader(); 
+          fr.onload=function(){ 
+              //  document.getElementById('output') 
+              //          .textContent=fr.result; 
+              //window.alert(fr.result);
+              App.filedata=fr.result;
+          }                       
+          fr.readAsText(this.files[0]); 
+          }) ;
+      //file event listener adding
 
         home.hide();
         selectUserForRegistration.hide();
@@ -490,6 +631,11 @@ App = {
         dashboardpatient.hide();
         dashboardinsuranceprovider.hide();
     }
+  },
+  
+  loginRegisterClick : async () =>{
+    window.alert("hi");
+    App.load();
   }
 }
 
@@ -499,7 +645,6 @@ App = {
 //   })
 // })
 
-function loginRegisterClick(){
- 
-  App.load();
-}
+// function loginRegisterClick1() { 
+//   App.load();
+// }
