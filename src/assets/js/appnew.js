@@ -139,6 +139,7 @@ App = {
           var doctoraddress=doctor.addr;
           if(doctoraddress.toUpperCase().localeCompare(App.account.toUpperCase())==0){
             var doctorname=doctor.name;
+            $("#doctornameforprofile").html(doctorname);
             var doctorRegID=doctor.regId;
             var hospitalid=doctor.hospitalid;
             var hospitalname=await App.healthcare.hospitals(hospitalid)            
@@ -151,8 +152,7 @@ App = {
             $("#docprofilephone").html(extrafields[2]);
             $("#docprofileaddress").html(extrafields[5]+","+extrafields[6]+","+extrafields[7]+","+extrafields[8]+","+extrafields[9]);
             $("#docprofilename1").html(doctorname);
-            $("#docprofilegender").html(extrafields[1]);
-            window.alert(extrafields[1])
+            $("#docprofilegender").html(extrafields[1]);            
             $("#docprofileemail").html(extrafields[3]);
             $("#docprofilespecialization").html(extrafields[4]);
             $("#docprofilebiodata").html(extrafields[10]);           
@@ -270,7 +270,45 @@ App = {
       }
       App.loading=false;
   },
-  
+  ViewPatientsByDoctor :async () =>{
+    $("#viewFilesbyDoctor").empty();
+    window.alert("checking");
+       //Retriee Doctor ID
+       var doctorCount=await App.healthcare.doctorCount(); 
+       var doctorid=0;       
+          for (var i = 1; i <= doctorCount; i++) {
+            var doctor=await App.healthcare.doctors(i);         
+            var doctoraddress=doctor.addr;
+            if(doctoraddress.toUpperCase().localeCompare(App.account.toUpperCase())==0){
+                doctorid=i;           
+                break;
+            }
+          }
+      //Retrieve all File sharing
+      var fileSharingCount=await App.healthcare.fileSharingCount(); 
+      var patientid=0;       
+         for (var i = 1; i <= fileSharingCount; i++) {
+           var filesharing=await App.healthcare.filesharings(i);         
+           var idDoctor=filesharing.doctorid;
+           if(doctorid==idDoctor){
+             //File sharing found
+             //Retrieve patient Details
+             patientid=parseInt(filesharing.patientid);
+             var patient= await App.healthcare.patients(patientid); 
+             var link="https://ipfs.infura.io/ipfs/"+filesharing.filehash;
+             var str=`<tr><td>${i}</td><td>${patient.name}</td><td>${patient.addr}</td><td><a href ='${link}'>${filesharing.filehash}</a></td></tr>`;
+             console.log(str);
+             $("#viewFilesbyDoctor").append(str);
+           }
+         }
+    $("#doctormain").hide();
+    $("#viewPatientsbydoctor").show();
+
+  },
+  viewProfileofDoctor :async () =>{
+    $("#doctormain").show();
+    $("#viewPatientsbydoctor").hide();
+  },
   bookAppointmentByPatient : async()=>{
     $("#selectDoctorforBookingbypatient").empty();
     var doctorcount=await App.healthcare.doctorCount();       
@@ -352,7 +390,7 @@ App = {
         break;
       }
     }     
-    await App.healthcare.addFileSharing(parseInt(patientid),parseInt(doctorId),appointmentdate,appointmenttime,filehash, { from: App.account }); 
+    await App.healthcare.addFileSharing(parseInt(patientid),parseInt(doctorId),filehash, { from: App.account }); 
     // $("#patientmain").show();
     // $("#patientbooking").hide();  
     // $("#patientbookingView").hide();
@@ -390,8 +428,7 @@ App = {
     //window.alert(docFullname +hospitalSelect +docRegId);
     //Reading Extra fields
     var docDoB=$("#docDoB").val();
-    var docgender = $("input[name='docgender']:checked").val();
-   
+    var docgender = $("input[name='docgender']:checked").val();   
     var docphone=$("#docphone").val(); 
     var docemail=$("#docemail").val(); 
     var docspecialization=$("#docspecialization").val(); 
