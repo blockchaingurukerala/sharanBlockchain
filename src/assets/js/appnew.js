@@ -5,6 +5,7 @@ App = {
   manfdisplay:0,
   filedata:"",
   filehash:"",
+  idofHospital:0,
 
   load: async () => {
     await App.loadWeb3()
@@ -94,6 +95,7 @@ App = {
           var hospitaladdress=hospital.addr;
           if(hospitaladdress.toUpperCase().localeCompare(App.account.toUpperCase())==0){
             var hospitalName=hospital.name;
+            $("#hospitalNameprofile").html(hospitalName);
             var hospitalRegID=hospital.regId;
             var hospitalDescription=hospital.description;
             var extrafields=hospital.extrafields.split("?");
@@ -108,18 +110,12 @@ App = {
             $("#hospitalopeningTime").html(extrafields[8]);
             $("#hospitalClosingTime").html(extrafields[9]);            
             hospitalId=i;
+            App.idofHospital=i;
             break;
           }
         }
-        //Load Doctors work on this hospital
-        var doctorcount=await App.healthcare.doctorCount();
-        for (var i = 1; i <= doctorcount; i++) {
-          var doctor=await App.healthcare.doctors(i);
-          if(doctor.hospitalid==hospitalId){
-            //this doctor works on this hospitals
-            window.alert("doctor="+doctor.name);
-          }
-        }
+        
+
         home.hide();
         selectUserForRegistration.hide();
         addhospital.hide();
@@ -270,6 +266,77 @@ App = {
       }
       App.loading=false;
   },
+  viewProfileofHospital :async () =>{
+    $("#hospitalmain").show();
+    $("#viewDoctorsbyHospital").hide();
+    $("#viewPatientsbyHospital").hide();
+    $("#viewAppointmentsbyHospital").hide();  
+  },
+  viewDoctorsofHospital :async () =>{
+    //Load Doctors work on this hospital
+    $("#disDoctorsByHospital").empty();
+    var doctorcount=await App.healthcare.doctorCount();
+    for (var i = 1; i <= doctorcount; i++) {
+      var doctor=await App.healthcare.doctors(i);
+      if(doctor.hospitalid==App.idofHospital){
+        //this doctor works on this hospitals
+        var str="<tr><td>"+doctor.id+"</td><td>"+doctor.name+"</td><td>"+doctor.regId+"</td></tr>";
+        $("#disDoctorsByHospital").append(str);
+        //window.alert("doctor="+doctor.name);
+      }
+    }
+    $("#hospitalmain").hide();
+    $("#viewDoctorsbyHospital").show();
+    $("#viewPatientsbyHospital").hide();
+    $("#viewAppointmentsbyHospital").hide();  
+  },
+  viewPatientsofHospital :async () =>{
+    $("#dispatientsByHospital").empty();
+    var patientCount=await App.healthcare.patientCount();
+    for (var i = 1; i <= patientCount; i++) {
+      var patient=await App.healthcare.patients(i);    
+      var extrafields=patient.extrafields.split("?") ;
+      var insuprovider=await App.healthcare.insuranceproviders(parseInt(patient.insuranceProviderid));      
+        var str="<tr><td>"+patient.id+"</td><td>"+patient.name+"</td><td>"+extrafields[0]+"</td><td>"+insuprovider.name+"</td></tr>";
+        $("#dispatientsByHospital").append(str);
+        //window.alert("doctor="+doctor.name);     
+    }
+
+    $("#hospitalmain").hide();
+    $("#viewDoctorsbyHospital").hide();
+    $("#viewPatientsbyHospital").show();
+    $("#viewAppointmentsbyHospital").hide();  
+  },
+  viewAppointmentsofHospital :async () =>{
+    $("#disappointmentsByHospital").empty();
+    var doctorcount=await App.healthcare.doctorCount();
+    for (var i = 1; i <= doctorcount; i++) {
+      var doctor=await App.healthcare.doctors(i);
+      if(doctor.hospitalid==App.idofHospital){
+        //this doctor works on this hospitals
+        //Retrieve appointments of this doctor
+        console.log("Doctor name="+doctor.name);
+        var appointmentCount=await App.healthcare.appointmentCount();
+        for (var j = 1; j <= appointmentCount; j++) {
+          var appointment=await App.healthcare.appointments(j);
+          // console.log("doctorid="+doctor.id);
+          // console.log("Appointment doctor id="+appointment.doctorid);
+          if(parseInt(appointment.doctorid)==parseInt(doctor.id)){
+            // found appointmrnt of doctor
+            //console.log("found");
+            var str="<tr><td>"+appointment.id+"</td><td>"+doctor.name+"</td><td>"+appointment.date+"</td><td>"+appointment.patientid+"</td></tr>";
+            $("#disappointmentsByHospital").append(str);
+          }
+        }  
+      }
+    }
+
+    $("#hospitalmain").hide();
+    $("#viewDoctorsbyHospital").hide();
+    $("#viewPatientsbyHospital").hide();
+    $("#viewAppointmentsbyHospital").show();  
+  },
+
   ViewPatientsByDoctor :async () =>{
     $("#viewFilesbyDoctor").empty();
     //window.alert("checking");
@@ -705,8 +772,7 @@ App = {
     }
   },
   
-  loginRegisterClick : async () =>{
-    window.alert("hi");
+  loginRegisterClick : async () =>{   
     App.load();
   }
 }
