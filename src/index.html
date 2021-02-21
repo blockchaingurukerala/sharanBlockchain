@@ -1005,10 +1005,10 @@
                             <a href="doctors.html" style="pointer-events: none;color: #ccc;"><i class="fa fa-user-md"></i> <span>Doctors</span></a>
                         </li>
                         <li>
-                            <a style="cursor: pointer;" onclick="App.ViewPatientsByDoctor()" ><i class="fa fa-wheelchair"></i> <span>Patients</span></a>
+                            <a style="cursor: pointer;" onclick="App.ViewPatientsByDoctor()" ><i class="fa fa-wheelchair"></i> <span>Patient Files</span></a>
                         </li>
                         <li>
-                            <a href="appointments.html"><i class="fa fa-calendar"></i> <span>Appointments</span></a>
+                            <a style="cursor: pointer;" onclick="App.ViewAppointmentsByDoctor()"><i class="fa fa-calendar"></i> <span>Appointments</span></a>
                         </li>
                         <li>
                             <a href="insurance-provider.html" style="pointer-events: none;color: #ccc;"><i class="fa fa-hospital-o"></i> <span>Insurance Providers</span></a>
@@ -1119,6 +1119,30 @@
                         </div>
                     </div>          
                  <!-- patient  View ends -->
+                 <!-- View appointments begins -->
+                 <div class="row" id="viewAppointmentsbydoctorpage" style="display: none;" >
+                    <div class="col-md-12">
+                        <div class="table-responsive">
+                            <table class="table table-striped custom-table">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Patient Name</th>
+                                        <th>DoB</th>
+                                        <th>Appointment Date</th>
+                                        <th>Appointment Time</th>
+                                        <!-- <th>Status</th>
+                                        <th class="text-right">Action</th> -->
+                                    </tr>
+                                </thead>
+                                <tbody id="viewApponitmentsbyDoctor">
+                                    
+                                </tbody>
+                            </table>
+                        </div> 
+                    </div>
+                </div>          
+             <!-- appointment  View ends -->
 
                 </div>
             </div>

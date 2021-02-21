@@ -272,7 +272,7 @@ App = {
   },
   ViewPatientsByDoctor :async () =>{
     $("#viewFilesbyDoctor").empty();
-    window.alert("checking");
+    //window.alert("checking");
        //Retriee Doctor ID
        var doctorCount=await App.healthcare.doctorCount(); 
        var doctorid=0;       
@@ -303,11 +303,46 @@ App = {
          }
     $("#doctormain").hide();
     $("#viewPatientsbydoctor").show();
+    $("#viewAppointmentsbydoctorpage").hide();
 
+  },
+  ViewAppointmentsByDoctor :async ()=>{
+    $("#viewApponitmentsbyDoctor").empty();
+    //Retriee Doctor ID
+       var doctorCount=await App.healthcare.doctorCount(); 
+       var doctorid=0;       
+          for (var i = 1; i <= doctorCount; i++) {
+            var doctor=await App.healthcare.doctors(i);         
+            var doctoraddress=doctor.addr;
+            if(doctoraddress.toUpperCase().localeCompare(App.account.toUpperCase())==0){
+                doctorid=i;           
+                break;
+            }
+          }
+          //Retrieve appointments
+       var appointmentCount=await App.healthcare.appointmentCount();
+       for (var i = 1; i <= appointmentCount; i++) {
+        var appointment=await App.healthcare.appointments(i);         
+        var d_id=appointment.doctorid;
+        if(d_id==doctorid){
+          console.log("appontment found");
+          var p_id=appointment.patientid;
+          var patient=await App.healthcare.patients(p_id); 
+          var extrafields=patient.extrafields.split("?");          
+          var str="<tr><td>"+appointment.id+"</td><td>"+patient.name+"</td><td>"+extrafields[0]+"</td><td>"+appointment.date+"</td><td>"+appointment.time;
+          console.log(str);
+          $("#viewApponitmentsbyDoctor").append(str);
+        }
+      }
+
+    $("#doctormain").hide();
+    $("#viewPatientsbydoctor").hide();
+    $("#viewAppointmentsbydoctorpage").show();
   },
   viewProfileofDoctor :async () =>{
     $("#doctormain").show();
     $("#viewPatientsbydoctor").hide();
+    $("#viewAppointmentsbydoctorpage").hide();
   },
   bookAppointmentByPatient : async()=>{
     $("#selectDoctorforBookingbypatient").empty();
