@@ -230,6 +230,7 @@ App = {
             var insuranceRegID=insurance.regId;                     
             
             $("#isuprofname").html(insurancename);
+            $("#insuranceprofilenam").html(insurancename);
             $("#isuprofregid").html(insuranceRegID);            
             var extrafields=insurance.extrafields.split("?");
             $("#isuprofwebsite").html(extrafields[0]);
@@ -265,7 +266,40 @@ App = {
         dashboardinsuranceprovider.hide();
       }
       App.loading=false;
+  },  
+  viewProfileofIns :async () =>{
+    $("#insurancemainpage").show();
+    $("#viewpatientsbyinsurance").hide();    
   },
+  viewPatientsByIns :async () =>{
+     //Retriee insurance provider ID
+     $("#diaplaypatientdetailsbyinsu").empty();
+     var insuCount=await App.healthcare.insuranceCount(); 
+     var insuid=0;       
+        for (var i = 1; i <= insuCount; i++) {
+          var insu=await App.healthcare.insuranceproviders(i);         
+          var insuaddress=insu.addr;
+          if(insuaddress.toUpperCase().localeCompare(App.account.toUpperCase())==0){
+            insuid=i;           
+              break;
+          }
+        }
+    var patientCount=await App.healthcare.patientCount();
+    for (var i = 1; i <= patientCount; i++) {
+      var patient=await App.healthcare.patients(i); 
+      console.log(patient)
+      console.log(parseInt(patient[3]))
+      console.log(insuid);
+      if(parseInt(patient[3])==insuid) {
+        var extrafields=patient.extrafields.split("?") ;          
+        var str="<tr><td>"+patient.id+"</td><td>"+patient.name+"</td><td>"+extrafields[0]+"</td><td>"+extrafields[4]+"</td></tr>";
+        $("#diaplaypatientdetailsbyinsu").append(str);
+      }   
+    }
+    $("#insurancemainpage").hide();
+    $("#viewpatientsbyinsurance").show();    
+  },
+  
   viewProfileofHospital :async () =>{
     $("#hospitalmain").show();
     $("#viewDoctorsbyHospital").hide();

@@ -1426,7 +1426,7 @@
                         <a href="#" class="dropdown-toggle nav-link user-link" data-toggle="dropdown">
                             <span class="user-img"><img class="rounded-circle" src="assets/img/user.jpg" width="40" alt="Admin">
                                 <span class="status online"></span></span>
-                            <span>Admin</span>
+                            <span id="insuranceprofilenam"></span>
                         </a>
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="login.html">Logout</a>
@@ -1445,22 +1445,22 @@
                     <div id="sidebar-menu" class="sidebar-menu">
                         <ul>
                             <li>
-                                <a href="index.html"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
+                                <a style="cursor: pointer;" onclick="App.viewProfileofIns()"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
                             </li>
                             <li>
-                                <a href="healthcare-provider.html"><i class="fa fa-hospital-o"></i> <span>Healthcare Providers</span></a>
+                                <a href="healthcare-provider.html" style="pointer-events: none;color: #ccc;"><i class="fa fa-hospital-o"></i> <span>Healthcare Providers</span></a>
                             </li>
                             <li>
-                                <a href="doctors.html"><i class="fa fa-user-md"></i> <span>Doctors</span></a>
+                                <a href="doctors.html" style="pointer-events: none;color: #ccc;"><i class="fa fa-user-md"></i> <span>Doctors</span></a>
                             </li>
                             <li>
-                                <a href="patients.html"><i class="fa fa-wheelchair"></i> <span>Patients</span></a>
+                                <a style="cursor: pointer;" onclick="App.viewPatientsByIns()"><i class="fa fa-wheelchair"></i> <span>Patients</span></a>
                             </li>
                             <li>
-                                <a href="appointments.html"><i class="fa fa-calendar"></i> <span>Appointments</span></a>
+                                <a href="appointments.html" style="pointer-events: none;color: #ccc;"><i class="fa fa-calendar"></i> <span>Appointments</span></a>
                             </li>
                             <li class="active">
-                                <a href="insurance-provider.html"><i class="fa fa-hospital-o"></i> <span>Insurance Providers</span></a>
+                                <a href="insurance-provider.html" style="pointer-events: none;color: #ccc;"><i class="fa fa-hospital-o"></i> <span>Insurance Providers</span></a>
                             </li>					                        
                         </ul>
                     </div>
@@ -1478,7 +1478,7 @@
                         </div>
                     </div>
                     <div class="card-box profile-header">
-                        <div class="row">
+                        <div class="row" id="insurancemainpage">
                             <div class="col-md-12">
                                 <div class="profile-view">
                                     <div class="profile-img-wrap">
@@ -1528,6 +1528,19 @@
                                     </div>
                                 </div>                        
                             </div>
+                        </div>
+                        <div class="row" id="viewpatientsbyinsurance" style="display: none;">
+                                <table class="table">
+                                    <tr>
+                                        <th>Patient ID</th>
+                                        <th>Patient Name</th>
+                                        <th>Patient DoB</th>
+                                        <th>Isurance ID</th> 
+                                    </tr>
+                                    <tbody id="diaplaypatientdetailsbyinsu">
+
+                                    </tbody>
+                                </table>
                         </div>
                     </div>
                 </div>

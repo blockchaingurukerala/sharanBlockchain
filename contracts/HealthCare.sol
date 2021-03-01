@@ -91,7 +91,7 @@ contract HealthCare {
     function registerInsuranceProvider (string memory _name,string memory _regId,string memory _approved,string memory _extrafields) public {
         require(bytes(roles[msg.sender]).length==0);
         insuranceCount ++;
-        insuranceproviders[insuranceCount] = InsuranceProvider(doctorCount,msg.sender,_name,_regId,_approved,_extrafields);    
+        insuranceproviders[insuranceCount] = InsuranceProvider(insuranceCount,msg.sender,_name,_regId,_approved,_extrafields);    
         roles[msg.sender]="4";   
         //emit registeredEvent(msg.sender);
     } 
