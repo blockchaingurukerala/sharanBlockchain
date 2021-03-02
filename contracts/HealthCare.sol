@@ -74,12 +74,18 @@ contract HealthCare {
         roles[msg.sender]="1";   
         //emit registeredEvent(msg.sender);
     } 
+     function updateHospital (uint id,string memory _name,string memory _regId,string memory _description,string memory _approved,string memory _extrafields) public {       
+        hospitals[id] = Hospital(id,msg.sender,_name,_regId,_description,_approved,_extrafields);    
+    } 
   function registerDoctor (string memory _name,uint _hospitalId,string memory _regId,string memory _approved,string memory _extrafields) public {
         require(bytes(roles[msg.sender]).length==0);
         doctorCount ++;
         doctors[doctorCount] = Doctor(doctorCount,msg.sender,_name,_hospitalId,_regId,_approved,_extrafields);    
         roles[msg.sender]="2";   
         //emit registeredEvent(msg.sender);
+    } 
+    function updaterDoctor (uint id,string memory _name,uint _hospitalId,string memory _regId,string memory _approved,string memory _extrafields) public {
+        doctors[id] = Doctor(id,msg.sender,_name,_hospitalId,_regId,_approved,_extrafields);   
     } 
      function registerPatient (string memory _name,uint _insuranceProviderId,uint _familyDoctorId,string memory _approved,string memory _extrafields,string memory _filehashes) public {
         require(bytes(roles[msg.sender]).length==0);
@@ -88,12 +94,18 @@ contract HealthCare {
         roles[msg.sender]="3";   
         //emit registeredEvent(msg.sender);
     } 
+    function updatePatient (uint id,string memory _name,uint _insuranceProviderId,uint _familyDoctorId,string memory _approved,string memory _extrafields,string memory _filehashes) public {
+        patients[id] = Patient(id,msg.sender,_name,_insuranceProviderId,_familyDoctorId,_approved,_extrafields,_filehashes);    
+    } 
     function registerInsuranceProvider (string memory _name,string memory _regId,string memory _approved,string memory _extrafields) public {
         require(bytes(roles[msg.sender]).length==0);
         insuranceCount ++;
         insuranceproviders[insuranceCount] = InsuranceProvider(insuranceCount,msg.sender,_name,_regId,_approved,_extrafields);    
         roles[msg.sender]="4";   
         //emit registeredEvent(msg.sender);
+    } 
+    function updateInsuranceProvider (uint id,string memory _name,string memory _regId,string memory _approved,string memory _extrafields) public {
+        insuranceproviders[id] = InsuranceProvider(id,msg.sender,_name,_regId,_approved,_extrafields);
     } 
     function addAppointment (uint _patientid,uint _doctorid,string memory _date,string memory _time ) public {
         //require(bytes(roles[msg.sender]).length==0);
@@ -109,4 +121,5 @@ contract HealthCare {
         
         //emit registeredEvent(msg.sender);
     } 
+
 }

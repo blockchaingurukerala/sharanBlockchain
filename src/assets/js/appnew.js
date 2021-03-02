@@ -6,6 +6,7 @@ App = {
   filedata:"",
   filehash:"",
   idofHospital:0,
+  idofInsurance:0,
 
   load: async () => {
     await App.loadWeb3()
@@ -237,7 +238,8 @@ App = {
             $("#isuprofphone").html(extrafields[1]);
             $("#isuprofemail").html(extrafields[2]);
             $("#isuprofaddress").html(extrafields[3]+","+extrafields[4]+","+extrafields[5]+","+extrafields[6]+","+extrafields[7]);           
-            $("#isuprofdescription").html(extrafields[8]);                   
+            $("#isuprofdescription").html(extrafields[8]); 
+            App.idofInsurance=i;                  
             break;
           }
         }
@@ -269,7 +271,53 @@ App = {
   },  
   viewProfileofIns :async () =>{
     $("#insurancemainpage").show();
-    $("#viewpatientsbyinsurance").hide();    
+    $("#viewpatientsbyinsurance").hide(); 
+    $("#editInsurancePage").hide();     
+  },
+  showEditInsurancePage :async ()=>{
+    //load all values for edit
+        
+          var insurance=await App.healthcare.insuranceproviders(parseInt(App.idofInsurance));         
+          var insuranceaddress=insurance.addr;
+            var insurancename=insurance.name;
+            var insuranceRegID=insurance.regId;           
+            $("#editinsurancename").val(insurancename);
+            $("#editinsuranceregno").val(insuranceRegID);            
+            var extrafields=insurance.extrafields.split("?");
+            $("#editinsurancewebsite").val(extrafields[0]);
+            $("#editinsurancephone").val(extrafields[1]);
+            $("#editinsuranceemail").val(extrafields[2]);
+            $("#editinsuranceaddress").val(extrafields[3]);
+            $("#editinsurancecountry").val(extrafields[4]);
+            $("#editinsurancestate").val(extrafields[5]);
+            $("#editinsurancecity").val(extrafields[6]);
+            $("#editinsurancepostalcode").val(extrafields[7]);                    
+            $("#editinsurancedescription").val(extrafields[8]);                   
+        
+    $("#insurancemainpage").hide();
+    $("#viewpatientsbyinsurance").hide();  
+    $("#editInsurancePage").show();       
+  },
+  updateInsurance : async ()=>{
+    //window.alert("calling edit insurance");
+    var insuName=$("#editinsurancename").val();
+    var insuRegId=$("#editinsuranceregno").val();
+     //Reading Extra fields
+     var addinsuwebsite=$("#editinsurancewebsite").val();  
+     var addinsuphone=$("#editinsurancephone").val(); 
+     var addinsuemail=$("#editinsuranceemail").val(); 
+     var addinsuaddress=$("#editinsuranceaddress").val(); 
+     var addinsucountry=$("#editinsurancecountry").val(); 
+     var addinsustate=$("#editinsurancestate").val(); 
+     var addinsucity=$("#editinsurancecity").val(); 
+     var addinsupostalcode=$("#editinsurancepostalcode").val(); 
+     var addinsudescription=$("#editinsurancedescription").val(); 
+    
+     var extrafields=addinsuwebsite+"?"+addinsuphone+"?"+addinsuemail+"?"+addinsuaddress+"?"+addinsucountry+"?"+addinsustate+"?"+addinsucity+"?"+addinsupostalcode+"?"+addinsudescription;
+     
+     await App.healthcare.updateInsuranceProvider(parseInt(App.idofInsurance),insuName,insuRegId,"false",extrafields, { from: App.account }); 
+      alert("updated successfully"); 
+      await App.render();
   },
   viewPatientsByIns :async () =>{
      //Retriee insurance provider ID
@@ -297,6 +345,7 @@ App = {
       }   
     }
     $("#insurancemainpage").hide();
+    $("#editInsurancePage").hide();
     $("#viewpatientsbyinsurance").show();    
   },
   
@@ -304,7 +353,8 @@ App = {
     $("#hospitalmain").show();
     $("#viewDoctorsbyHospital").hide();
     $("#viewPatientsbyHospital").hide();
-    $("#viewAppointmentsbyHospital").hide();  
+    $("#viewAppointmentsbyHospital").hide(); 
+    $("#edithospital").hide(); 
   },
   viewDoctorsofHospital :async () =>{
     //Load Doctors work on this hospital
@@ -323,6 +373,7 @@ App = {
     $("#viewDoctorsbyHospital").show();
     $("#viewPatientsbyHospital").hide();
     $("#viewAppointmentsbyHospital").hide();  
+    $("#edithospital").hide();
   },
   viewPatientsofHospital :async () =>{
     $("#dispatientsByHospital").empty();
@@ -339,7 +390,8 @@ App = {
     $("#hospitalmain").hide();
     $("#viewDoctorsbyHospital").hide();
     $("#viewPatientsbyHospital").show();
-    $("#viewAppointmentsbyHospital").hide();  
+    $("#viewAppointmentsbyHospital").hide(); 
+    $("#edithospital").hide(); 
   },
   viewAppointmentsofHospital :async () =>{
     $("#disappointmentsByHospital").empty();
@@ -369,6 +421,67 @@ App = {
     $("#viewDoctorsbyHospital").hide();
     $("#viewPatientsbyHospital").hide();
     $("#viewAppointmentsbyHospital").show();  
+    $("#edithospital").hide();
+  },
+  showEditHospital :async () =>{
+    //show present details from blockchain for edit
+    var hospitalcount=await App.healthcare.hospitalCount();       
+    for (var i = 1; i <= hospitalcount; i++) {
+      var hospital=await App.healthcare.hospitals(i);         
+      var hospitaladdress=hospital.addr;
+      if(hospitaladdress.toUpperCase().localeCompare(App.account.toUpperCase())==0){
+        var hospitalName=hospital.name;        
+        var hospitalRegID=hospital.regId;
+        var hospitalDescription=hospital.description;
+        var extrafields=hospital.extrafields.split("?");
+       // window.alert(hospitalName);
+        $("#edithospitalname").val(hospitalName);
+        $("#edithospitalregno").val(hospitalRegID);
+        $("#edithospitaldescription").val(hospitalDescription);            
+        $("#edithospitalwebsite").val(extrafields[0]);
+        $("#edithospitalphone").val(extrafields[1]);
+        $("#edithospitalemail").val(extrafields[2]);
+        $("#edithospitaladdress").val(extrafields[3]);
+        $("#edithopitalcountry").val(extrafields[4]);
+        $("#edithospitalstate").val(extrafields[5]);
+        $("#edithospitalcity").val(extrafields[6]);
+        $("#edithospitalpostalcode").val(extrafields[7]);
+        $("#edithospitalopeningtime").val(extrafields[8]);
+        $("#edithospitalclosingtime").val(extrafields[9]);            
+        // hospitalId=i;
+        // App.idofHospital=i;
+        break;
+      }
+    }
+    $("#hospitalmain").hide();
+    $("#viewDoctorsbyHospital").hide();
+    $("#viewPatientsbyHospital").hide();
+    $("#viewAppointmentsbyHospital").hide();  
+    $("#edithospital").show();
+  },
+  updateHospital :async () =>{
+    var hospitalname=$("#edithospitalname").val();
+    var hospitalid=$("#edithospitalregno").val(); 
+    var hospitaldescription=$("#edithospitaldescription").val(); 
+    //Extra Fields
+    var hospitalwebsite=$("#edithospitalwebsite").val();
+    var hospitalphone=$("#edithospitalphone").val();
+    var hospitalemail=$("#edithospitalemail").val();
+    var hospitaladdress=$("#edithospitaladdress").val();
+    var hospitalcountry=$("#edithopitalcountry").val();
+    var hospitalstate=$("#edithospitalstate").val();
+    var hospitalcity=$("#edithospitalcity").val();
+    var hospitalpostalcode=$("#edithospitalpostalcode").val();
+    var hospitalopeningtime=$("#edithospitalopeningtime").val();
+    var hospitalclosingtime=$("#edithospitalclosingtime").val();    
+    var extrafields=hospitalwebsite+"?"+hospitalphone+"?"+hospitalemail+"?"+hospitaladdress+"?"+hospitalcountry+"?"+hospitalstate+"?"+hospitalcity+"?"+hospitalpostalcode+"?"+hospitalopeningtime+"?"+hospitalclosingtime;
+    //Extra fields ends
+    //window.alert(hospitalname+hospitalid+hospitaldescription);
+    //window.alert(extrafields);
+      //App.idofHospital
+    await App.healthcare.updateHospital(parseInt(App.idofHospital),hospitalname,hospitalid,hospitaldescription,"false",extrafields, { from: App.account }); 
+    window.alert("Updated successfully"); 
+    await App.render();
   },
 
   ViewPatientsByDoctor :async () =>{

@@ -890,7 +890,7 @@
                         <h4 class="page-title">Healthcare Profile</h4>
                     </div>
                     <div class="col-sm-2 col-1 text-right m-b-30">
-                        <a href="edit-healthcare-provider.html" class="btn btn-primary btn-rounded"><i class="fa fa-plus"></i> Edit Healthcare</a>
+                        <a style="cursor: pointer;" onclick="App.showEditHospital()" class="btn btn-primary btn-rounded"><i class="fa fa-plus"></i> Edit Healthcare</a>
                     </div>
                 </div>
                 <div class="card-box profile-header">
@@ -956,7 +956,112 @@
                         </div>
                     </div>
                     <!-- hospital main page Ends -->
-
+                    <!-- hospital edit page starts -->
+                    <div class="row" id="edithospital" style="display: none;">
+                        <div class="content">
+                            <div class="row">
+                                <div class="col-lg-8 offset-lg-2">
+                                    <h4 class="page-title">Edit Healthcare Provider</h4>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-8 offset-lg-2">
+                                    <form>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>Hospital Name<span class="text-danger">*</span></label>
+                                                    <input class="form-control" type="text" id="edithospitalname">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>Hospital Registration ID<span class="text-danger">*</span></label>
+                                                    <input class="form-control" type="text" id="edithospitalregno">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <div class="form-group">
+                                                    <label>Website<span class="text-danger">*</span></label>
+                                                    <input class="form-control" type="user-link" id="edithospitalwebsite">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <div class="form-group">
+                                                    <label>Phone </label>
+                                                    <input class="form-control" type="text" id="edithospitalphone">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <div class="form-group">
+                                                    <label>Email <span class="text-danger">*</span></label>
+                                                    <input class="form-control" type="email" id="edithospitalemail">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <div class="form-group">
+                                                            <label>Address</label>
+                                                            <input type="text" class="form-control " id="edithospitaladdress">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6 col-md-6 col-lg-3">
+                                                        <div class="form-group">
+                                                            <label>Country</label>
+                                                            <input type="text" class="form-control " id="edithopitalcountry">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6 col-md-6 col-lg-3">
+                                                        <div class="form-group">
+                                                            <label>State</label>
+                                                            <input type="text" class="form-control " id="edithospitalstate">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6 col-md-6 col-lg-3">
+                                                        <div class="form-group">
+                                                            <label>City</label>
+                                                            <input type="text" class="form-control " id="edithospitalcity">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6 col-md-6 col-lg-3">
+                                                        <div class="form-group">
+                                                            <label>Postal Code</label>
+                                                            <input type="text" class="form-control" id="edithospitalpostalcode">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Open Timings</label>
+                                                    <div class="time-icon">
+                                                        <input type="text" class="form-control" id="edithospitalopeningtime">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Closed Timings</label>
+                                                    <div class="time-icon">
+                                                        <input type="text" class="form-control" id="edithospitalclosingtime">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Hospital Description</label>
+                                            <textarea class="form-control" rows="3" cols="30" id="edithospitaldescription"></textarea>
+                                        </div>
+                                        <div class="m-t-20 text-center">
+                                            <button class="btn btn-primary submit-btn" onclick="App.updateHospital()">Save</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- hospital edit page ends -->
                     <!-- Doctor page view by hospital -->
                     <div class="row" id="viewDoctorsbyHospital" style="display: none;">
                         <table class="table">
@@ -1474,7 +1579,7 @@
                         </div>
     
                         <div class="col-sm-5 col-6 text-right m-b-30">
-                            <a href="edit-insurance-provider.html" class="btn btn-primary btn-rounded"><i class="fa fa-plus"></i> Edit Insurance</a>
+                            <a style="cursor: pointer;" onclick="App.showEditInsurancePage()" class="btn btn-primary btn-rounded"><i class="fa fa-plus"></i> Edit Insurance</a>
                         </div>
                     </div>
                     <div class="card-box profile-header">
@@ -1527,6 +1632,94 @@
                                         </div>
                                     </div>
                                 </div>                        
+                            </div>
+                        </div>
+                        <div class="row" id="editInsurancePage" style="display: none;">
+                            <div class="content">
+                                <div class="row">
+                                    <div class="col-lg-8 offset-lg-2">
+                                        <h4 class="page-title">Edit Insurance Provider</h4>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-8 offset-lg-2">
+                                        
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label>Insurance Name<span class="text-danger">*</span></label>
+                                                        <input class="form-control" type="text" id="editinsurancename">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label>Insurance Registration ID<span class="text-danger">*</span></label>
+                                                        <input class="form-control" type="text" id="editinsuranceregno">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <div class="form-group">
+                                                        <label>Website<span class="text-danger">*</span></label>
+                                                        <input class="form-control" type="user-link" id="editinsurancewebsite">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <div class="form-group">
+                                                        <label>Phone </label>
+                                                        <input class="form-control" type="text" id="editinsurancephone">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <div class="form-group">
+                                                        <label>Email <span class="text-danger">*</span></label>
+                                                        <input class="form-control" type="email" id="editinsuranceemail">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <div class="row">
+                                                        <div class="col-sm-12">
+                                                            <div class="form-group">
+                                                                <label>Address</label>
+                                                                <input type="text" class="form-control" id="editinsuranceaddress">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6 col-md-6 col-lg-3">
+                                                            <div class="form-group">
+                                                                <label>Country</label>
+                                                                <input type="text" class="form-control" id="editinsurancecountry">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6 col-md-6 col-lg-3">
+                                                            <div class="form-group">
+                                                                <label>State</label>
+                                                                <input type="text" class="form-control" id="editinsurancestate">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6 col-md-6 col-lg-3">
+                                                            <div class="form-group">
+                                                                <label>City</label>
+                                                                <input type="text" class="form-control" id="editinsurancecity">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6 col-md-6 col-lg-3">
+                                                            <div class="form-group">
+                                                                <label>Postal Code</label>
+                                                                <input type="text" class="form-control" id="editinsurancepostalcode">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Insurance Description</label>
+                                                <textarea class="form-control" rows="3" cols="30" id="editinsurancedescription"></textarea>
+                                            </div>
+                                            <div class="m-t-20 text-center">
+                                                <button class="btn btn-primary " onclick="App.updateInsurance();">Save</button>
+                                            </div>
+                                       
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="row" id="viewpatientsbyinsurance" style="display: none;">
