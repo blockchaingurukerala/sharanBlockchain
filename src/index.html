@@ -1172,7 +1172,7 @@
                     </div>
 
                     <div class="col-sm-5 col-6 text-right m-b-30">
-                        <a href="edit-doctor.html" class="btn btn-primary btn-rounded"><i class="fa fa-plus"></i> Edit Doctor</a>
+                        <a style="cursor: pointer;" onclick="App.showEditDoctorPage()" class="btn btn-primary btn-rounded"><i class="fa fa-plus"></i> Edit Doctor</a>
                     </div>
                 </div>
                 <div class="card-box profile-header">
@@ -1243,6 +1243,149 @@
                         </div>
                     </div>
                     <!-- doctor main profile ends -->
+                    <!-- edit doctor page begins -->
+                    <div class="row" id="editdoctorpage" style="display: none;">
+                        <div class="content">
+                            <div class="row">
+                                <div class="col-lg-8 offset-lg-2">
+                                    <h4 class="page-title">Edit Doctor</h4>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-8 offset-lg-2">
+                                   
+                                        <div class="row">
+                                            <!-- <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <label>Profile Photo</label>
+                                                    <div class="profile-upload">
+                                                        <div class="upload-img">
+                                                            <img alt="" src="assets/img/user.jpg">
+                                                        </div>
+                                                        <div class="upload-input">
+                                                            <input type="file" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div> -->
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>First Name <span class="text-danger">*</span></label>
+                                                    <input class="form-control" type="text" id="editdoctorfname">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>Last Name</label>
+                                                    <input class="form-control" type="text" id="editdoctorlname">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>Date of Birth</label>
+                                                    <div class="cal-icon">
+                                                        <input type="text" class="form-control datetimepicker"id="editdoctordob">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group gender-select">
+                                                    <label class="gen-label">Gender:</label>
+                                                    <div class="form-check-inline">
+                                                        <label class="form-check-label">
+                                                            <input type="radio" id="editdoctormale" name="editdoctorgender" value="Male" class="form-check-input">Male
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check-inline">
+                                                        <label class="form-check-label">
+                                                            <input type="radio" id="editdoctorfemale" name="editdoctorgender" value="Female" class="form-check-input">Female
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>Phone </label>
+                                                    <input class="form-control" type="text" id="editdoctorphone">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>Email <span class="text-danger">*</span></label>
+                                                    <input class="form-control" type="email" id="editdoctoremail">
+                                                </div>
+                                            </div>  
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <label>Hospital<span class="text-danger">*</span></label>
+                                                    <select class="form-control" id="editdoctorhospitalSelect"></select>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>Registration ID<span class="text-danger">*</span></label>
+                                                    <input class="form-control" type="text" id="editdoctorregno">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>Specialization<span class="text-danger">*</span></label>
+                                                    <input class="form-control" type="text" id="editdoctorspecialization">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <div class="form-group">
+                                                            <label>Address</label>
+                                                            <input type="text" class="form-control " id="editdoctoraddress">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6 col-md-6 col-lg-3">
+                                                        <div class="form-group">
+                                                            <div class="form-group">
+                                                            <label>Country</label>
+                                                            <input type="text" class="form-control" id="editdoctorcountry">
+                                                        </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6 col-md-6 col-lg-3">
+                                                        <div class="form-group">
+                                                            <label>State</label>
+                                                            <input type="text" class="form-control" id="editdoctorstate">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6 col-md-6 col-lg-3">
+                                                        <div class="form-group">
+                                                            <div class="form-group">
+                                                            <label>City</label>
+                                                            <input type="text" class="form-control" id="editdoctorcity">
+                                                        </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6 col-md-6 col-lg-3">
+                                                        <div class="form-group">
+                                                            <label>Postal Code</label>
+                                                            <input type="text" class="form-control" id="editdoctorpostalcode">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Short Biography</label>
+                                            <textarea class="form-control" rows="3" cols="30" id="editdoctorbiodata"></textarea>
+                                        </div>
+                                        <div class="m-t-20 text-center">
+                                            <button class="btn btn-primary" onclick="App.updateDoctor()" >Save</button>
+                                        </div>
+                                  
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- edit doctor page ends -->
                     <!-- View patients begins -->
                     <div class="row" id="viewPatientsbydoctor" style="display: none;" >
                         <div class="col-md-12">

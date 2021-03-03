@@ -7,6 +7,7 @@ App = {
   filehash:"",
   idofHospital:0,
   idofInsurance:0,
+  idofDoctor:0,
 
   load: async () => {
     await App.loadWeb3()
@@ -152,7 +153,8 @@ App = {
             $("#docprofilegender").html(extrafields[1]);            
             $("#docprofileemail").html(extrafields[3]);
             $("#docprofilespecialization").html(extrafields[4]);
-            $("#docprofilebiodata").html(extrafields[10]);           
+            $("#docprofilebiodata").html(extrafields[10]);   
+            App.idofDoctor=i;        
             break;
           }
         }
@@ -518,6 +520,7 @@ App = {
     $("#doctormain").hide();
     $("#viewPatientsbydoctor").show();
     $("#viewAppointmentsbydoctorpage").hide();
+    $("#editdoctorpage").hide();
 
   },
   ViewAppointmentsByDoctor :async ()=>{
@@ -552,11 +555,85 @@ App = {
     $("#doctormain").hide();
     $("#viewPatientsbydoctor").hide();
     $("#viewAppointmentsbydoctorpage").show();
+    $("#editdoctorpage").hide();
+  },
+  showEditDoctorPage :async ()=>{
+      //load available hospital list
+      var hospitalSelect=$("#editdoctorhospitalSelect");    
+      hospitalSelect.empty();
+      var count= await App.healthcare.hospitalCount();
+      for (var i = 1; i <= count; i++) {       
+        var hospital=await App.healthcare.hospitals(i);
+        var hospitalname=hospital[2];
+        var hospitalid=hospital[0];
+        var str = "<option value='" + hospitalid + "' >" + hospitalname + "</ option>";
+        hospitalSelect.append(str);
+      }
+      var doctor=await App.healthcare.doctors(parseInt(App.idofDoctor));
+        var doctorname=doctor.name.split(" ");  
+        var doctorfname=doctorname[0];
+        var doctorlname=doctorname[1];
+        var doctorRegID=doctor.regId;     
+        var doctorRegID=doctor.regId;
+        var hospitalid=doctor.hospitalid;
+        var hospitalname=await App.healthcare.hospitals(hospitalid)            
+         //console.log(hospitalname.name);
+        $("#editdoctorfname").val(doctorfname);
+        $("#editdoctorlname").val(doctorlname);
+        $("#editdoctorregno").val(doctorRegID);
+        // $("#editdoctorhospitalSelect").val(hospitalname.name);
+        var extrafields=doctor.extrafields.split("?");
+        $("#editdoctordob").val(extrafields[0]);
+        $("#editdoctorphone").val(extrafields[2]);
+        $("#editdoctoraddress").val(extrafields[5]);
+        $("#editdoctorcountry").val(extrafields[6]);
+        $("#editdoctorstate").val(extrafields[7]);
+        $("#editdoctorcity").val(extrafields[8]);
+        $("#editdoctorpostalcode").val(extrafields[9]);      
+        if(extrafields[1].localeCompare("Male")==0) {
+          $("#editdoctormale").prop("checked",true);
+        }   
+        else{
+          $("#editdoctorfemale").prop("checked",true);
+        }       
+        $("#editdoctoremail").val(extrafields[3]);
+        $("#editdoctorspecialization").val(extrafields[4]);
+        $("#editdoctorbiodata").val(extrafields[10]);     
+    $("#doctormain").hide();
+    $("#viewPatientsbydoctor").hide();
+    $("#viewAppointmentsbydoctorpage").hide();
+    $("#editdoctorpage").show();
+  },
+  updateDoctor :async ()=>{
+    var docFName=$("#editdoctorfname").val();
+    var docLName=$("#editdoctorlname").val();
+    var docFullname=docFName+" "+docLName;
+    var hospitalSelect=$("#editdoctorhospitalSelect").val();  
+    var docRegId=$("#editdoctorregno").val(); 
+    //window.alert(docFullname +hospitalSelect +docRegId);
+    //Reading Extra fields
+    var docDoB=$("#editdoctordob").val();
+    var docgender = $("input[name='editdoctorgender']:checked").val();   
+    var docphone=$("#editdoctorphone").val(); 
+    var docemail=$("#editdoctoremail").val(); 
+    var docspecialization=$("#editdoctorspecialization").val(); 
+    var docaddress=$("#editdoctoraddress").val(); 
+    var doccountry=$("#editdoctorcountry").val(); 
+    var docstate=$("#editdoctorstate").val(); 
+    var doccity=$("#editdoctorcity").val(); 
+    var docpostalcode=$("#editdoctorpostalcode").val(); 
+    var docbiodata=$("#editdoctorbiodata").val(); 
+    var extrafields=docDoB+"?"+docgender+"?"+docphone+"?"+docemail+"?"+docspecialization+"?"+docaddress+"?"+doccountry+"?"+docstate+"?"+doccity+"?"+docpostalcode+"?"+docbiodata;    
+    //Extra fields ends
+    await App.healthcare.updaterDoctor(parseInt(App.idofDoctor),docFullname,parseInt(hospitalSelect),docRegId,"false",extrafields, { from: App.account }); 
+    window.alert("updated successfully"); 
+    await App.render();
   },
   viewProfileofDoctor :async () =>{
     $("#doctormain").show();
     $("#viewPatientsbydoctor").hide();
     $("#viewAppointmentsbydoctorpage").hide();
+    $("#editdoctorpage").hide();
   },
   bookAppointmentByPatient : async()=>{
     $("#selectDoctorforBookingbypatient").empty();
@@ -569,6 +646,7 @@ App = {
     $("#patientmain").hide();
     $("#patientbooking").show();  
     $("#patientbookingView").hide();
+    $("#editdoctorpage").hide();
   },
   createAppointmentByPatient :async()=>{
     var patientCount=await App.healthcare.patientCount(); 
@@ -624,6 +702,7 @@ App = {
     $("#patientmain").hide();
     $("#patientbooking").hide();  
     $("#patientbookingView").show();
+    $("#editdoctorpage").hide();
   },
   shareFileToDoctor :async ()=>{
     var doctorId=$("#doctorSelectforShareFiles").val();   
