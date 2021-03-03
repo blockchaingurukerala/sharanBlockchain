@@ -94,7 +94,8 @@ contract HealthCare {
         roles[msg.sender]="3";   
         //emit registeredEvent(msg.sender);
     } 
-    function updatePatient (uint id,string memory _name,uint _insuranceProviderId,uint _familyDoctorId,string memory _approved,string memory _extrafields,string memory _filehashes) public {
+    function updatePatient (uint id,string memory _name,uint _insuranceProviderId,uint _familyDoctorId,string memory _approved,string memory _extrafields) public {
+        string memory _filehashes=patients[id].filehashes;
         patients[id] = Patient(id,msg.sender,_name,_insuranceProviderId,_familyDoctorId,_approved,_extrafields,_filehashes);    
     } 
     function registerInsuranceProvider (string memory _name,string memory _regId,string memory _approved,string memory _extrafields) public {

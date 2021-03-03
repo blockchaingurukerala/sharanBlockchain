@@ -8,6 +8,7 @@ App = {
   idofHospital:0,
   idofInsurance:0,
   idofDoctor:0,
+  idofPatient:0,
 
   load: async () => {
     await App.loadWeb3()
@@ -193,7 +194,8 @@ App = {
            
             $("#patprofilegender").html(extrafields[1]);           
             $("#patprofileemail").html(extrafields[3]);
-            $("#patprofileinsuranceId").html(extrafields[4]);                      
+            $("#patprofileinsuranceId").html(extrafields[4]);  
+            App.idofPatient=i;                    
             break;
           }
         }
@@ -635,6 +637,85 @@ App = {
     $("#viewAppointmentsbydoctorpage").hide();
     $("#editdoctorpage").hide();
   },
+  showPatientEditPage :async () =>{
+     //Load all Insurance Providers Registered
+     var insuranceProviderSelect=$("#editpatientinsuranceProviderSelect");    
+     insuranceProviderSelect.empty();
+     var count= await App.healthcare.insuranceCount();
+     for (var i = 1; i <= count; i++) {
+       //console.log("Check select option"+i);
+       var insurance=await App.healthcare.insuranceproviders(i);
+       var insurancename=insurance[2];
+       var insuranceid=insurance[0];
+       var str = "<option value='" + insuranceid + "' >" + insurancename + "</ option>";
+       insuranceProviderSelect.append(str);
+     }
+   //Load all Doctors Registered
+     var doctorSelect=$("#editpatientdoctorSelect");    
+     doctorSelect.empty();
+     var count= await App.healthcare.doctorCount();
+     for (var i = 1; i <= count; i++) {
+       //console.log("Check select option"+i);
+       var doctor=await App.healthcare.doctors(i);
+       var doctorname=doctor[2];
+       var doctorid=doctor[0];
+       var str = "<option value='" + doctorid + "' >" + doctorname + "</ option>";
+       doctorSelect.append(str);
+     }
+
+     //Load all other details from Blockchain
+     var patient=await App.healthcare.patients(parseInt(App.idofPatient));     
+     var patientname=patient.name.split(" ");
+     $("#editpatientfname").val(patientname[0]);
+     $("#editpatientlname").val(patientname[1]);
+   
+    
+     var extrafields=patient.extrafields.split("?");
+     $("#editpatientdob").val(extrafields[0]);
+     $("#editpatientphone").val(extrafields[2]);
+     $("#editpatientaddress").val(extrafields[5]);
+     $("#editpatientcountry").val(extrafields[6]);
+     $("#editpatientstate").val(extrafields[7]);
+     $("#editpatientcity").val(extrafields[8]);
+     $("#editpatientpostalcode").val(extrafields[9]); 
+     $("#editpatientemail").val(extrafields[3]);
+     $("#editpatientinsuid").val(extrafields[4]); 
+     if(extrafields[1].localeCompare("Male")==0) {
+      $("#editpatientmale").prop("checked",true);
+    }   
+    else{
+      $("#editpatientfemale").prop("checked",true);
+    }      
+
+    $("#patientmain").hide();
+    $("#patientbooking").hide();  
+    $("#patientbookingView").hide();
+    $("#editdoctorpage").hide();
+    $("#editpatientpage").show();
+  },
+  updatePatient :async ()=>{
+    var patFName=$("#editpatientfname").val();
+    var patLName=$("#editpatientlname").val();
+    var patFullname=patFName+" "+patLName;
+    var insuranceProviderSelect=$("#editpatientinsuranceProviderSelect").val();
+    var doctorSelect=$("#editpatientdoctorSelect").val();
+    //
+    //window.alert(insuName +insuRegId );
+    // Read Extra fileds
+    var patDOB=$("#editpatientdob").val();
+    var patgender = $("input[name='editpatientgender']:checked").val();
+    var patPhone=$("#editpatientphone").val();
+    var patEmail=$("#editpatientemail").val();
+    var patInsuranceID=$("#editpatientinsuid").val();
+    var patAddress=$("#editpatientaddress").val();
+    var patCountry=$("#editpatientcountry").val();
+    var patState=$("#editpatientstate").val();
+    var patCity=$("#editpatientcity").val();
+    var patPostalCode=$("#editpatientpostalcode").val(); 
+    var extrafields=patDOB+"?"+patgender+"?"+patPhone+"?"+patEmail+"?"+patInsuranceID+"?"+patAddress+"?"+patCountry+"?"+patState+"?"+patCity+"?"+patPostalCode;         
+     await App.healthcare.updatePatient(parseInt(App.idofPatient),patFullname,parseInt(insuranceProviderSelect),parseInt(doctorSelect),"false",extrafields, { from: App.account });
+     await App.render();
+  },
   bookAppointmentByPatient : async()=>{
     $("#selectDoctorforBookingbypatient").empty();
     var doctorcount=await App.healthcare.doctorCount();       
@@ -647,6 +728,7 @@ App = {
     $("#patientbooking").show();  
     $("#patientbookingView").hide();
     $("#editdoctorpage").hide();
+    $("#editpatientpage").hide();
   },
   createAppointmentByPatient :async()=>{
     var patientCount=await App.healthcare.patientCount(); 
@@ -703,7 +785,16 @@ App = {
     $("#patientbooking").hide();  
     $("#patientbookingView").show();
     $("#editdoctorpage").hide();
+    $("#editpatientpage").hide();
   },
+  showDashboardByPatient :async ()=>{
+    $("#patientmain").show();
+    $("#patientbooking").hide();  
+    $("#patientbookingView").hide();
+    $("#editdoctorpage").hide();
+    $("#editpatientpage").hide();
+  },
+ 
   shareFileToDoctor :async ()=>{
     var doctorId=$("#doctorSelectforShareFiles").val();   
     var patientCount=await App.healthcare.patientCount(); 
