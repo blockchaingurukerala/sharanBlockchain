@@ -45,7 +45,159 @@
         </div>
     </div>
     <!-- home page ends -->
+ <!-- Admin Dashboard begins -->
+ <div class="main-wrapper" id="admindashboard" style="display: none;">
+    <div class="header">
+        <div class="header-left">
+            <a href="index.html" class="logo">
+                <img src="assets/img/logo.png" width="35" height="35" alt=""> <span>SSD Healthcare</span>
+            </a>
+        </div>
+        <a id="toggle_btn" href="javascript:void(0);"><i class="fa fa-bars"></i></a>
+        <a id="mobile_btn" class="mobile_btn float-left" href="#sidebar"><i class="fa fa-bars"></i></a>
+        <ul class="nav user-menu float-right">
+            <li class="nav-item dropdown has-arrow">
+                <a href="#" class="dropdown-toggle nav-link user-link" data-toggle="dropdown">
+                    <span class="user-img"><img class="rounded-circle" src="assets/img/user.jpg" width="40" alt="Admin">
+                        <span class="status online"></span></span>
+                    <span>Amin Page</span>
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="login.html">Logout</a>
+                </div>
+            </li>
+        </ul>
+        <div class="dropdown mobile-user-menu float-right">
+            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
+            <div class="dropdown-menu dropdown-menu-right">
+                <a class="dropdown-item" href="login.html">Logout</a>
+            </div>
+        </div>
+    </div>
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-inner slimscroll">
+            <div id="sidebar-menu" class="sidebar-menu">
+                <ul>
+                    <li class="active">
+                        <a style="cursor: pointer;" onclick="App.viewallHospitalsbyAdmin()"><i class="fa fa-dashboard"></i> <span>Health Providers</span></a>
+                    </li>
+                    <li>
+                        <a style="cursor: pointer;" onclick="App.viewallDoctorsbyAdmin()"><i class="fa fa-hospital-o"></i> <span>Doctors</span></a>
+                    </li>
+                    <li>
+                        <a style="cursor: pointer;" onclick="App.viewallInsurancebyAdmin()"><i class="fa fa-user-md"></i> <span>Inssurance Providers</span></a>
+                    </li>
+                    <li>
+                        <a style="cursor: pointer;" onclick="App.viewallPatientsbyAmin()"><i class="fa fa-wheelchair"></i> <span>Patients</span></a>
+                    </li>
+                    <li >
+                        <a style="cursor: pointer;" onclick="App.viewallappointmentsbyAdmin()"><i class="fa fa-calendar"></i> <span>Appointments</span></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="page-wrapper">
+        <div class="content">
+            <div class="row">
+                <div class="col-lg-8 offset-lg-2">
+                    <h4 class="page-title">Admin Panel</h4>
+                </div>
+            </div>
+            <div class="row" id="adminviewhospitalspage">
+                <div class="col-lg-8 offset-lg-2">
+                    <table class="table">
+                        <tr>
+                            <td colspan="3" align="center"><h3>Health Providers</h3></td>
+                        </tr>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Reg No</th>
+                        </tr>
+                        <tbody id="displayallhospitalsbyadmin">
 
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row" id="adminviewdoctorspage" style="display: none;">
+                <div class="col-lg-8 offset-lg-2">
+                    <table class="table">
+                        <tr>
+                            <td colspan="4" align="center"><h3>All Doctors</h3></td>
+                        </tr>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Reg No</th>
+                            <th>Hospital</th>
+                        </tr>
+                        <tbody id="displayalldoctorsbyadmin">
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row" id="adminviewinsurancepage" style="display: none;">
+                <div class="col-lg-8 offset-lg-2">
+                    <table class="table">
+                        <tr>
+                            <td colspan="4" align="center"><h3>All Insurance Providers </h3></td>
+                        </tr>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Reg No</th>                           
+                        </tr>
+                        <tbody id="displayallinsurancebyadmin">
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row" id="adminviewpatientspage" style="display: none;">
+                <div class="col-lg-8 offset-lg-2">
+                    <table class="table">
+                        <tr>
+                            <td colspan="4" align="center"><h3>All Patients</h3></td>
+                        </tr>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Insurance Provider</th>
+                            <th>Family Doctor</th>
+                        </tr>
+                        <tbody id="displayallpatientsbyadmin">
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row" id="adminviewappointmentsspage" style="display: none;">
+                <div class="col-lg-8 offset-lg-2">
+                    <table class="table">
+                        <tr>
+                            <td colspan="4" align="center"><h3>All Appointments</h3></td>
+                        </tr>
+                        <tr>
+                            <th>ID</th>
+                            <th>Patient Name</th>
+                            <th>Doctor</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                        </tr>
+                        <tbody id="displayallappointmnetsbyadmin">
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+<!-- Admin dashboard Ends -->
 
     <!-- select user type for registration begins -->
     <div class="main-wrapper" id="selectUserForRegistration" style="display: none;">

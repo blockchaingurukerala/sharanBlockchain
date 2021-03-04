@@ -85,6 +85,7 @@ App = {
       var addDoctor = $("#addDoctor");
       var addInsurance = $("#addInsurance");
       var addPatient = $("#addPatient");
+      var admindashboard= $("#admindashboard");
       //var loader = $("#loader");      
       var role=await App.healthcare.roles(App.account); 
       //window.alert(role);
@@ -129,6 +130,7 @@ App = {
         dashboarddoctor.hide();
         dashboardpatient.hide();
         dashboardinsuranceprovider.hide();
+        admindashboard.hide();
       }
       else if(role=="2"){
         //Doctor
@@ -169,6 +171,7 @@ App = {
         dashboarddoctor.show();
         dashboardpatient.hide();
         dashboardinsuranceprovider.hide();
+        admindashboard.hide();
       }
       else if(role=="3"){
         //Patient
@@ -222,6 +225,7 @@ App = {
         dashboarddoctor.hide();
         dashboardpatient.show();
         dashboardinsuranceprovider.hide();
+        admindashboard.hide();
 
       }
       else if(role=="4"){
@@ -257,22 +261,127 @@ App = {
         dashboarddoctor.hide();
         dashboardpatient.hide();
         dashboardinsuranceprovider.show();
+        admindashboard.hide();
       }
       else{
-        //New User
-        home.hide();
-        selectUserForRegistration.show();
-        addhospital.hide();
-        addDoctor.hide();
-        addInsurance.hide();
-        addPatient.hide();
-        dashboardhealthprovider.hide();
-        dashboarddoctor.hide();
-        dashboardpatient.hide();
-        dashboardinsuranceprovider.hide();
+        //check if admin User
+          var admin=await App.healthcare.admin();       
+          if(admin.toUpperCase().localeCompare(App.account.toUpperCase())==0){
+            home.hide();
+            selectUserForRegistration.hide();
+            addhospital.hide();
+            addDoctor.hide();
+            addInsurance.hide();
+            addPatient.hide();
+            dashboardhealthprovider.hide();
+            dashboarddoctor.hide();
+            dashboardpatient.hide();
+            dashboardinsuranceprovider.hide();
+            App.viewallHospitalsbyAdmin();
+            admindashboard.show();
+          }
+          else{
+                 //New User
+                home.hide();
+                selectUserForRegistration.show();
+                addhospital.hide();
+                addDoctor.hide();
+                addInsurance.hide();
+                addPatient.hide();
+                dashboardhealthprovider.hide();
+                dashboarddoctor.hide();
+                dashboardpatient.hide();
+                dashboardinsuranceprovider.hide();
+                admindashboard.hide();
+          }
       }
       App.loading=false;
   },  
+  viewallHospitalsbyAdmin :async ()=>{
+      $("#displayallhospitalsbyadmin").empty();
+      var hospitalcount=await App.healthcare.hospitalCount(); 
+       
+      for (var i = 1; i <= hospitalcount; i++) {
+          var hospital=await App.healthcare.hospitals(i);
+          var str="<tr><td>"+hospital.id+"</td><td>"+hospital.name+"</td><td>"+hospital.regId+"</td></tr>";
+          $("#displayallhospitalsbyadmin").append(str);        
+      }
+      $("#adminviewhospitalspage").show();
+      $("#adminviewdoctorspage").hide();
+      $("#adminviewinsurancepage").hide();
+      $("#adminviewpatientspage").hide();
+      $("#adminviewappointmentsspage").hide(); 
+  },
+  viewallDoctorsbyAdmin :async ()=>{
+        $("#displayalldoctorsbyadmin").empty();
+        var doctorcount=await App.healthcare.doctorCount();       
+        for (var i = 1; i <= doctorcount; i++) {
+            var doctor=await App.healthcare.doctors(i); 
+            var hospitalid=doctor.hospitalid;
+            var hospital=await App.healthcare.hospitals(hospitalid) 
+            console.log(hospital.name);
+            var str="<tr><td>"+doctor.id+"</td><td>"+doctor.name+"</td><td>"+doctor.regId+"</td><td>"+hospital.name+"</td></tr>";
+            
+             $("#displayalldoctorsbyadmin").append(str); 
+        }
+      $("#adminviewhospitalspage").hide();
+      $("#adminviewdoctorspage").show();
+      $("#adminviewinsurancepage").hide();
+      $("#adminviewpatientspage").hide();
+      $("#adminviewappointmentsspage").hide(); 
+  },
+  viewallInsurancebyAdmin :async ()=>{
+      $("#displayallinsurancebyadmin").empty();
+      var insuranceCount=await App.healthcare.insuranceCount(); 
+      
+      for (var i = 1; i <= insuranceCount; i++) {
+          var insurance=await App.healthcare.insuranceproviders(i);
+          var str="<tr><td>"+insurance.id+"</td><td>"+insurance.name+"</td><td>"+insurance.regId+"</td></tr>";
+          $("#displayallinsurancebyadmin").append(str);        
+      }
+      $("#adminviewhospitalspage").hide();
+      $("#adminviewdoctorspage").hide();
+      $("#adminviewinsurancepage").show();
+      $("#adminviewpatientspage").hide();
+      $("#adminviewappointmentsspage").hide(); 
+  },
+  viewallPatientsbyAmin :async ()=>{
+      $("#displayallpatientsbyadmin").empty();
+      var patientCount=await App.healthcare.patientCount();       
+      for (var i = 1; i <= patientCount; i++) {
+          var patient=await App.healthcare.patients(i); 
+          var insuranceProviderid=patient.insuranceProviderid;
+          var familyDoctorid=patient.familyDoctorid;
+          var insurance=await App.healthcare.insuranceproviders(insuranceProviderid) 
+          var doctor=await App.healthcare.doctors(familyDoctorid)          
+          var str="<tr><td>"+patient.id+"</td><td>"+patient.name+"</td><td>"+insurance.name+"</td><td>"+doctor.name+"</td></tr>";
+          $("#displayallpatientsbyadmin").append(str); 
+      }
+      $("#adminviewhospitalspage").hide();
+      $("#adminviewdoctorspage").hide();
+      $("#adminviewinsurancepage").hide();
+      $("#adminviewpatientspage").show();
+      $("#adminviewappointmentsspage").hide(); 
+  },
+  viewallappointmentsbyAdmin :async ()=>{
+      $("#displayallappointmnetsbyadmin").empty();
+      var appointmentCount=await App.healthcare.appointmentCount();       
+      for (var i = 1; i <= appointmentCount; i++) {
+          var appointment=await App.healthcare.appointments(i); 
+          var patientid=appointment.patientid;
+          var doctorid=appointment.doctorid;          
+          var patient=await App.healthcare.patients(patientid) 
+          var doctor=await App.healthcare.doctors(doctorid)          
+          var str="<tr><td>"+appointment.id+"</td><td>"+patient.name+"</td><td>"+doctor.name+"</td><td>"+appointment.date+"</td><td>"+appointment.time+"</td></tr>";
+          $("#displayallappointmnetsbyadmin").append(str); 
+      }
+      $("#adminviewhospitalspage").hide();
+      $("#adminviewdoctorspage").hide();
+      $("#adminviewinsurancepage").hide();
+      $("#adminviewpatientspage").hide();
+      $("#adminviewappointmentsspage").show(); 
+  },
+  
   viewProfileofIns :async () =>{
     $("#insurancemainpage").show();
     $("#viewpatientsbyinsurance").hide(); 
