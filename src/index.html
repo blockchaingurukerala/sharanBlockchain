@@ -1118,7 +1118,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-lg-8 offset-lg-2">
-                                    <form>
+                                   
                                         <div class="row">
                                             <div class="col-sm-6">
                                                 <div class="form-group">
@@ -1208,7 +1208,7 @@
                                         <div class="m-t-20 text-center">
                                             <button class="btn btn-primary submit-btn" onclick="App.updateHospital()">Save</button>
                                         </div>
-                                    </form>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -1718,10 +1718,10 @@
                                                         <span class="title">Insurance ID</span>
                                                         <span class="text" id="patprofileinsuranceId">3rd March</span>
                                                     </li>
-                                                    <!-- <li>
-                                                        <span class="title">Short Biography</span>
-                                                        <span class="text">714 Burwell Heights Road, Bridge City, TX, 77611</span>
-                                                    </li> -->
+                                                    <li>
+                                                        <span class="title">My File</span>
+                                                        <span class="text"><a href="google.com" id="patprofilefilelink"></a></span>                                                        
+                                                    </li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -1839,6 +1839,12 @@
                                                             <div class="form-group">
                                                                 <label>Postal Code</label>
                                                                 <input type="text" class="form-control" id="editpatientpostalcode">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-12">
+                                                            <div class="form-group">
+                                                                <label>Upload File</label>
+                                                                <input type="file" class="form-control btn-rounded" onchange="App.editpatientFile(this)">
                                                             </div>
                                                         </div>
                                                         <!-- <div class="col-sm-12">

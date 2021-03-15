@@ -9,6 +9,8 @@ App = {
   idofInsurance:0,
   idofDoctor:0,
   idofPatient:0,
+  editpatientfiledata:"",
+  editpatientfilehash:"",
 
   load: async () => {
     await App.loadWeb3()
@@ -197,9 +199,12 @@ App = {
            
             $("#patprofilegender").html(extrafields[1]);           
             $("#patprofileemail").html(extrafields[3]);
-            $("#patprofileinsuranceId").html(extrafields[4]);  
-            App.idofPatient=i;                    
-            break;
+            $("#patprofileinsuranceId").html(extrafields[4]);
+            var url="https://ipfs.infura.io/ipfs/"+patient.filehashes;            
+            $("#patprofilefilelink").attr("href", url); 
+            $("#patprofilefilelink").html(patient.filehashes) ;         
+            App.idofPatient=i;                                
+            break;            
           }
         }
         //Load all Doctors for file Sharing         
@@ -821,9 +826,44 @@ App = {
     var patState=$("#editpatientstate").val();
     var patCity=$("#editpatientcity").val();
     var patPostalCode=$("#editpatientpostalcode").val(); 
-    var extrafields=patDOB+"?"+patgender+"?"+patPhone+"?"+patEmail+"?"+patInsuranceID+"?"+patAddress+"?"+patCountry+"?"+patState+"?"+patCity+"?"+patPostalCode;         
-     await App.healthcare.updatePatient(parseInt(App.idofPatient),patFullname,parseInt(insuranceProviderSelect),parseInt(doctorSelect),"false",extrafields, { from: App.account });
-     await App.render();
+    var extrafields=patDOB+"?"+patgender+"?"+patPhone+"?"+patEmail+"?"+patInsuranceID+"?"+patAddress+"?"+patCountry+"?"+patState+"?"+patCity+"?"+patPostalCode;
+    if(App.editpatientfiledata.localeCompare("")==0) {
+      await App.healthcare.updatePatient(parseInt(App.idofPatient),patFullname,parseInt(insuranceProviderSelect),parseInt(doctorSelect),"false",extrafields, { from: App.account });    
+    }
+    else{      
+      await App.healthcare.updatePatientwithFiles(parseInt(App.idofPatient),patFullname,parseInt(insuranceProviderSelect),parseInt(doctorSelect),"false",extrafields,App.editpatientfilehash, { from: App.account });    
+    }        
+      await App.render();
+  },
+  editpatientFile :async(input)=>{
+    let file = input.files[0];
+    let reader = new FileReader();
+    reader.readAsText(file);
+    reader.onload = function() {
+      console.log(reader.result);
+      App.editpatientfiledata=reader.result;
+      const ipfs = new IPFS({ host: 'ipfs.infura.io', port: 5001, protocol: 'https' });
+      var filehash="";
+      //window.alert(App.filedata);
+      ipfs.add(App.editpatientfiledata,(err,hash)=>{
+        if(err){
+          console.log(err); 
+          filehash="";
+          App.editpatientfilehash="";
+          window.alert("Eror in file upload to blockchain"+err) ;     
+        }
+       else{
+         console.log("https://ipfs.infura.io/ipfs/"+hash);
+         filehash=hash;  
+         App.editpatientfilehash=hash;
+         //window.alert("file uploaded to BC");
+       }
+     });
+    };
+    reader.onerror = function() {
+      console.log(reader.error);
+    };
+
   },
   bookAppointmentByPatient : async()=>{
     $("#selectDoctorforBookingbypatient").empty();

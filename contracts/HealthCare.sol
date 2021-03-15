@@ -98,6 +98,9 @@ contract HealthCare {
         string memory _filehashes=patients[id].filehashes;
         patients[id] = Patient(id,msg.sender,_name,_insuranceProviderId,_familyDoctorId,_approved,_extrafields,_filehashes);    
     } 
+    function updatePatientwithFiles (uint id,string memory _name,uint _insuranceProviderId,uint _familyDoctorId,string memory _approved,string memory _extrafields,string memory _filehash) public {
+        patients[id] = Patient(id,msg.sender,_name,_insuranceProviderId,_familyDoctorId,_approved,_extrafields,_filehash);    
+    } 
     function registerInsuranceProvider (string memory _name,string memory _regId,string memory _approved,string memory _extrafields) public {
         require(bytes(roles[msg.sender]).length==0);
         insuranceCount ++;
