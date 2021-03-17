@@ -322,10 +322,11 @@ App = {
         var doctorcount=await App.healthcare.doctorCount();       
         for (var i = 1; i <= doctorcount; i++) {
             var doctor=await App.healthcare.doctors(i); 
+            var extrafields=doctor.extrafields.split("?");              
             var hospitalid=doctor.hospitalid;
             var hospital=await App.healthcare.hospitals(hospitalid) 
             console.log(hospital.name);
-            var str="<tr><td>"+doctor.id+"</td><td>"+doctor.name+"</td><td>"+doctor.regId+"</td><td>"+hospital.name+"</td></tr>";
+            var str="<tr><td>"+doctor.id+"</td><td>"+doctor.name+"</td><td>"+doctor.regId+"</td><td>"+extrafields[4]+"</td><td>"+hospital.name+"</td></tr>";
             
              $("#displayalldoctorsbyadmin").append(str); 
         }
@@ -482,7 +483,8 @@ App = {
       var doctor=await App.healthcare.doctors(i);
       if(doctor.hospitalid==App.idofHospital){
         //this doctor works on this hospitals
-        var str="<tr><td>"+doctor.id+"</td><td>"+doctor.name+"</td><td>"+doctor.regId+"</td></tr>";
+        var extrafields=doctor.extrafields.split("?"); 
+        var str="<tr><td>"+doctor.id+"</td><td>"+doctor.name+"</td><td>"+doctor.regId+"</td><td>"+extrafields[4]+"</td></tr>";
         $("#disDoctorsByHospital").append(str);
         //window.alert("doctor="+doctor.name);
       }
@@ -497,11 +499,17 @@ App = {
     $("#dispatientsByHospital").empty();
     var patientCount=await App.healthcare.patientCount();
     for (var i = 1; i <= patientCount; i++) {
-      var patient=await App.healthcare.patients(i);    
-      var extrafields=patient.extrafields.split("?") ;
-      var insuprovider=await App.healthcare.insuranceproviders(parseInt(patient.insuranceProviderid));      
-        var str="<tr><td>"+patient.id+"</td><td>"+patient.name+"</td><td>"+extrafields[0]+"</td><td>"+insuprovider.name+"</td></tr>";
-        $("#dispatientsByHospital").append(str);
+      var patient=await App.healthcare.patients(i);  
+      var familydoctorid=patient.familyDoctorid; 
+      var doctor= await App.healthcare.doctors(parseInt(familydoctorid));
+      var hospitalid=doctor.hospitalid;
+      if(parseInt(App.idofHospital)==parseInt(hospitalid)){
+        var extrafields=patient.extrafields.split("?") ;
+        var insuprovider=await App.healthcare.insuranceproviders(parseInt(patient.insuranceProviderid));      
+          var str="<tr><td>"+patient.id+"</td><td>"+patient.name+"</td><td>"+extrafields[0]+"</td><td>"+insuprovider.name+"</td></tr>";
+          $("#dispatientsByHospital").append(str);
+      }
+      
         //window.alert("doctor="+doctor.name);     
     }
 
@@ -806,6 +814,8 @@ App = {
     $("#patientbookingView").hide();
     $("#editdoctorpage").hide();
     $("#editpatientpage").show();
+    $("#patientalldoctorsView").hide();
+    $("#patientallinsuranceView").hide();
   },
   updatePatient :async ()=>{
     var patFName=$("#editpatientfname").val();
@@ -878,6 +888,8 @@ App = {
     $("#patientbookingView").hide();
     $("#editdoctorpage").hide();
     $("#editpatientpage").hide();
+    $("#patientalldoctorsView").hide();
+    $("#patientallinsuranceView").hide();
   },
   createAppointmentByPatient :async()=>{
     var patientCount=await App.healthcare.patientCount(); 
@@ -935,6 +947,8 @@ App = {
     $("#patientbookingView").show();
     $("#editdoctorpage").hide();
     $("#editpatientpage").hide();
+    $("#patientalldoctorsView").hide();
+    $("#patientallinsuranceView").hide();
   },
   showDashboardByPatient :async ()=>{
     $("#patientmain").show();
@@ -942,8 +956,47 @@ App = {
     $("#patientbookingView").hide();
     $("#editdoctorpage").hide();
     $("#editpatientpage").hide();
+    $("#patientalldoctorsView").hide();
+    $("#patientallinsuranceView").hide();
   },
- 
+  showDoctorsByPatient :async ()=>{
+    $("#displayalldoctorsbypatient").empty();
+    var doctorcount=await App.healthcare.doctorCount();       
+    for (var i = 1; i <= doctorcount; i++) {
+        var doctor=await App.healthcare.doctors(i); 
+        var extrafields=doctor.extrafields.split("?");              
+        var hospitalid=doctor.hospitalid;
+        var hospital=await App.healthcare.hospitals(hospitalid) 
+        console.log(hospital.name);
+        var str="<tr><td>"+doctor.id+"</td><td>"+doctor.name+"</td><td>"+doctor.regId+"</td><td>"+extrafields[4]+"</td><td>"+hospital.name+"</td></tr>";
+        
+         $("#displayalldoctorsbypatient").append(str); 
+    }
+    $("#patientmain").hide();
+    $("#patientbooking").hide();  
+    $("#patientbookingView").hide();
+    $("#editdoctorpage").hide();
+    $("#editpatientpage").hide();
+    $("#patientalldoctorsView").show();
+    $("#patientallinsuranceView").hide();
+  },
+  showInsuranceProvidersByPatient :async ()=>{
+    $("#displayallinsurancebyPatient").empty();
+      var insuranceCount=await App.healthcare.insuranceCount(); 
+      
+      for (var i = 1; i <= insuranceCount; i++) {
+          var insurance=await App.healthcare.insuranceproviders(i);
+          var str="<tr><td>"+insurance.id+"</td><td>"+insurance.name+"</td><td>"+insurance.regId+"</td></tr>";
+          $("#displayallinsurancebyPatient").append(str);        
+      }
+    $("#patientmain").hide();
+    $("#patientbooking").hide();  
+    $("#patientbookingView").hide();
+    $("#editdoctorpage").hide();
+    $("#editpatientpage").hide();
+    $("#patientalldoctorsView").hide();
+    $("#patientallinsuranceView").show();
+  },
   shareFileToDoctor :async ()=>{
     var doctorId=$("#doctorSelectforShareFiles").val();   
     var patientCount=await App.healthcare.patientCount(); 

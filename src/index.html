@@ -10,215 +10,48 @@
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
     <!-- <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css"> -->
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
-    <!--[if lt IE 9]>
-		<script src="assets/js/html5shiv.min.js"></script>
-		<script src="assets/js/respond.min.js"></script>
-	<![endif]-->
-    
 </head>
 
 <body>
-    <!-- home page begins -->
+    <!-- Home Page Begins -->
     <div class="main-wrapper  account-wrapper" id="home">
         <div class="account-page">
             <div class="account-center">
-                <div class="account-box">                    
-                        <div class="account-logo">
-                            <a href="#"><img src="assets/img/logo-dark.png" alt=""></a>
-                        </div> 
-                       
-                        <div class="form-group checkbox">
-                            <label>
-                                <input type="checkbox"> I have read and agree the Terms & Conditions
-                            </label>
-                        </div>
-                        <div class="form-group text-center">
-                            <button class="btn btn-primary account-btn" type="button" onclick="App.loginRegisterClick()" >Enter</button>
-                           
-                        </div>
-                        <div class="text-center login-link">
-                            Already have an account? <a href="#">Login</a>
-                        </div>
-                  
+                <div class="account-box">
+                    <div class="account-logo">
+                        <a href="#"><img src="assets/img/logo-dark.png" alt=""></a>
+                    </div>
+                    <div class="form-group checkbox">
+                        <label>
+                            <p style = "text-align:center"><b>"Welcome To SSD Helthcare - The Power of Convenience"</b></p>
+                        </label>
+                    </div>
+                    <div class="form-group text-center">
+                        <button class="btn btn-primary account-btn" type="button" onclick="App.loginRegisterClick()">Register/Login</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- home page ends -->
- <!-- Admin Dashboard begins -->
- <div class="main-wrapper" id="admindashboard" style="display: none;">
-    <div class="header">
-        <div class="header-left">
-            <a href="index.html" class="logo">
-                <img src="assets/img/logo.png" width="35" height="35" alt=""> <span>SSD Healthcare</span>
-            </a>
-        </div>
-        <a id="toggle_btn" href="javascript:void(0);"><i class="fa fa-bars"></i></a>
-        <a id="mobile_btn" class="mobile_btn float-left" href="#sidebar"><i class="fa fa-bars"></i></a>
-        <ul class="nav user-menu float-right">
-            <li class="nav-item dropdown has-arrow">
-                <a href="#" class="dropdown-toggle nav-link user-link" data-toggle="dropdown">
-                    <span class="user-img"><img class="rounded-circle" src="assets/img/user.jpg" width="40" alt="Admin">
-                        <span class="status online"></span></span>
-                    <span>Amin Page</span>
-                </a>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" href="login.html">Logout</a>
-                </div>
-            </li>
-        </ul>
-        <div class="dropdown mobile-user-menu float-right">
-            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
-            <div class="dropdown-menu dropdown-menu-right">
-                <a class="dropdown-item" href="login.html">Logout</a>
-            </div>
-        </div>
-    </div>
-    <div class="sidebar" id="sidebar">
-        <div class="sidebar-inner slimscroll">
-            <div id="sidebar-menu" class="sidebar-menu">
-                <ul>
-                    <li class="active">
-                        <a style="cursor: pointer;" onclick="App.viewallHospitalsbyAdmin()"><i class="fa fa-dashboard"></i> <span>Health Providers</span></a>
-                    </li>
-                    <li>
-                        <a style="cursor: pointer;" onclick="App.viewallDoctorsbyAdmin()"><i class="fa fa-hospital-o"></i> <span>Doctors</span></a>
-                    </li>
-                    <li>
-                        <a style="cursor: pointer;" onclick="App.viewallInsurancebyAdmin()"><i class="fa fa-user-md"></i> <span>Inssurance Providers</span></a>
-                    </li>
-                    <li>
-                        <a style="cursor: pointer;" onclick="App.viewallPatientsbyAmin()"><i class="fa fa-wheelchair"></i> <span>Patients</span></a>
-                    </li>
-                    <li >
-                        <a style="cursor: pointer;" onclick="App.viewallappointmentsbyAdmin()"><i class="fa fa-calendar"></i> <span>Appointments</span></a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="page-wrapper">
-        <div class="content">
-            <div class="row">
-                <div class="col-lg-8 offset-lg-2">
-                    <h4 class="page-title">Admin Panel</h4>
-                </div>
-            </div>
-            <div class="row" id="adminviewhospitalspage">
-                <div class="col-lg-8 offset-lg-2">
-                    <table class="table">
-                        <tr>
-                            <td colspan="3" align="center"><h3>Health Providers</h3></td>
-                        </tr>
-                        <tr>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Reg No</th>
-                        </tr>
-                        <tbody id="displayallhospitalsbyadmin">
+    <!-- Home Page Ends -->
 
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="row" id="adminviewdoctorspage" style="display: none;">
-                <div class="col-lg-8 offset-lg-2">
-                    <table class="table">
-                        <tr>
-                            <td colspan="4" align="center"><h3>All Doctors</h3></td>
-                        </tr>
-                        <tr>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Reg No</th>
-                            <th>Hospital</th>
-                        </tr>
-                        <tbody id="displayalldoctorsbyadmin">
-
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="row" id="adminviewinsurancepage" style="display: none;">
-                <div class="col-lg-8 offset-lg-2">
-                    <table class="table">
-                        <tr>
-                            <td colspan="4" align="center"><h3>All Insurance Providers </h3></td>
-                        </tr>
-                        <tr>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Reg No</th>                           
-                        </tr>
-                        <tbody id="displayallinsurancebyadmin">
-
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="row" id="adminviewpatientspage" style="display: none;">
-                <div class="col-lg-8 offset-lg-2">
-                    <table class="table">
-                        <tr>
-                            <td colspan="4" align="center"><h3>All Patients</h3></td>
-                        </tr>
-                        <tr>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Insurance Provider</th>
-                            <th>Family Doctor</th>
-                        </tr>
-                        <tbody id="displayallpatientsbyadmin">
-
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="row" id="adminviewappointmentsspage" style="display: none;">
-                <div class="col-lg-8 offset-lg-2">
-                    <table class="table">
-                        <tr>
-                            <td colspan="4" align="center"><h3>All Appointments</h3></td>
-                        </tr>
-                        <tr>
-                            <th>ID</th>
-                            <th>Patient Name</th>
-                            <th>Doctor</th>
-                            <th>Date</th>
-                            <th>Time</th>
-                        </tr>
-                        <tbody id="displayallappointmnetsbyadmin">
-
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            
-        </div>
-    </div>
-</div>
-<!-- Admin dashboard Ends -->
-
-    <!-- select user type for registration begins -->
-    <div class="main-wrapper" id="selectUserForRegistration" style="display: none;">
+    <!-- EU Authorities Dashboard Begins -->
+    <div class="main-wrapper" id="admindashboard" style="display: none;">
         <div class="header">
-			<div class="header-left">
-				<a href="index.html" class="logo">
-					<img src="assets/img/logo.png" width="35" height="35" alt=""> <span>SSD Healthcare</span>
-				</a>
-			</div>
-			<a id="toggle_btn" href="javascript:void(0);"><i class="fa fa-bars"></i></a>
+            <div class="header-left">
+                <a href="index.html" class="logo">
+                    <img src="assets/img/logo.png" width="35" height="35" alt=""> <span>SSD Healthcare</span>
+                </a>
+            </div>
+            <a id="toggle_btn" href="javascript:void(0);"><i class="fa fa-bars"></i></a>
             <a id="mobile_btn" class="mobile_btn float-left" href="#sidebar"><i class="fa fa-bars"></i></a>
             <ul class="nav user-menu float-right">
                 <li class="nav-item dropdown has-arrow">
                     <a href="#" class="dropdown-toggle nav-link user-link" data-toggle="dropdown">
                         <span class="user-img"><img class="rounded-circle" src="assets/img/user.jpg" width="40" alt="Admin">
-							<span class="status online"></span></span>
-                        <span>Select User Type</span>
+                        <span class="status online"></span></span>
+                        <span>EU Authority</span>
                     </a>
-					<div class="dropdown-menu">
-						<a class="dropdown-item" href="login.html">Logout</a>
-					</div>
                 </li>
             </ul>
             <div class="dropdown mobile-user-menu float-right">
@@ -233,22 +66,19 @@
                 <div id="sidebar-menu" class="sidebar-menu">
                     <ul>
                         <li>
-                            <a href="index.html"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
+                            <a style="cursor: pointer;" onclick="App.viewallHospitalsbyAdmin()"><i class="fa fa-dashboard"></i> <span>Healthcare Providers</span></a>
                         </li>
                         <li>
-                            <a href="healthcare-provider.html"><i class="fa fa-hospital-o"></i> <span>Healthcare Providers</span></a>
+                            <a style="cursor: pointer;" onclick="App.viewallDoctorsbyAdmin()"><i class="fa fa-hospital-o"></i> <span>Doctors</span></a>
                         </li>
                         <li>
-                            <a href="doctors.html"><i class="fa fa-user-md"></i> <span>Doctors</span></a>
+                            <a style="cursor: pointer;" onclick="App.viewallInsurancebyAdmin()"><i class="fa fa-user-md"></i> <span>Insurance Providers</span></a>
                         </li>
                         <li>
-                            <a href="patients.html"><i class="fa fa-wheelchair"></i> <span>Patients</span></a>
-                        </li>
-                        <li class="active">
-                            <a href="appointments.html"><i class="fa fa-calendar"></i> <span>Appointments</span></a>
+                            <a style="cursor: pointer;" onclick="App.viewallPatientsbyAmin()"><i class="fa fa-wheelchair"></i> <span>Patients</span></a>
                         </li>
                         <li>
-                            <a href="insurance-provider.html"><i class="fa fa-hospital-o"></i> <span>Insurance Providers</span></a>
+                            <a style="cursor: pointer;" onclick="App.viewallappointmentsbyAdmin()"><i class="fa fa-calendar"></i> <span>Appointments</span></a>
                         </li>
                     </ul>
                 </div>
@@ -258,7 +88,146 @@
             <div class="content">
                 <div class="row">
                     <div class="col-lg-8 offset-lg-2">
-                        <h4 class="page-title">Select User Type</h4>
+                        <h4 class="page-title">SSD Healthcare - EU Authority Panel</h4>
+                    </div>
+                </div>
+                <div class="row" id="adminviewhospitalspage">
+                    <div class="col-lg-8 offset-lg-2">
+                        <table class="table">
+                            <tr>
+                                <td colspan="3" align="center">
+                                    <h3>Healthcare Providers</h3>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Registration No</th>
+                            </tr>
+                            <tbody id="displayallhospitalsbyadmin">
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row" id="adminviewdoctorspage" style="display: none;">
+                    <div class="col-lg-8 offset-lg-2">
+                        <table class="table">
+                            <tr>
+                                <td colspan="4" align="center">
+                                    <h3>All Doctors</h3>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Registration No</th>
+                                <th>Specialization</th>
+                                <th>Hospital</th>
+                            </tr>
+                            <tbody id="displayalldoctorsbyadmin">
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row" id="adminviewinsurancepage" style="display: none;">
+                    <div class="col-lg-8 offset-lg-2">
+                        <table class="table">
+                            <tr>
+                                <td colspan="3" align="center">
+                                    <h3>All Insurance Providers</h3>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Registration No</th>
+                            </tr>
+                            <tbody id="displayallinsurancebyadmin">
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row" id="adminviewpatientspage" style="display: none;">
+                    <div class="col-lg-8 offset-lg-2">
+                        <table class="table">
+                            <tr>
+                                <td colspan="4" align="center">
+                                    <h3>All Patients</h3>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Insurance Provider</th>
+                                <th>Family Doctor</th>
+                            </tr>
+                            <tbody id="displayallpatientsbyadmin">
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row" id="adminviewappointmentsspage" style="display: none;">
+                    <div class="col-lg-8 offset-lg-2">
+                        <table class="table">
+                            <tr>
+                                <td colspan="5" align="center">
+                                    <h3>All Appointments</h3>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>ID</th>
+                                <th>Patient Name</th>
+                                <th>Doctor</th>
+                                <th>Date</th>
+                                <th>Time</th>
+                            </tr>
+                            <tbody id="displayallappointmnetsbyadmin">
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- EU Authorities Dashboard Ends -->
+
+    <!-- Select User Type For Registration Begins -->
+    <div class="main-wrapper" id="selectUserForRegistration" style="display: none;">
+        <div class="header">
+            <div class="header-left">
+                <a href="index.html" class="logo">
+                    <img src="assets/img/logo.png" width="35" height="35" alt=""> <span>SSD Healthcare</span>
+                </a>
+            </div>
+            <a id="toggle_btn" href="javascript:void(0);"><i class="fa fa-bars"></i></a>
+            <a id="mobile_btn" class="mobile_btn float-left" href="#sidebar"><i class="fa fa-bars"></i></a>
+            <ul class="nav user-menu float-right">
+                <li class="nav-item dropdown has-arrow">
+                    <a href="#" class="dropdown-toggle nav-link user-link" data-toggle="dropdown">
+                        <span class="user-img"><img class="rounded-circle" src="assets/img/user.jpg" width="40" alt="Admin">
+							<span class="status online"></span></span>
+                        <span>Select User Type</span>
+                    </a>
+                </li>
+            </ul>
+            <div class="dropdown mobile-user-menu float-right">
+                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <a class="dropdown-item" href="login.html">Logout</a>
+                </div>
+            </div>
+        </div>
+        <div class="page-wrapper">
+            <div class="content">
+                <div class="row">
+                    <div class="col-lg-8 offset-lg-2">
+                        <h4 class="page-title">Experience The "Power of Accessibility" </h4>
                     </div>
                 </div>
                 <div class="row">
@@ -267,88 +236,58 @@
                         <select class="form-control" id="RoleSelect">
                             <option value="1" selected>HealthCare Provider</option>
                             <option value="2">Doctor</option>
-                            <option value="3">Patient</option>   
-                            <option value="4">Insurance Provider</option>                 
+                            <option value="3">Patient</option>
+                            <option value="4">Insurance Provider</option>
                         </select>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-lg-8 offset-lg-2 offset-md-3">
-                       <button class="btn btn-primary" onclick="App.proceesRegistration()">Proceed</button>
+                        <button class="btn btn-primary" onclick="App.proceesRegistration()">Proceed</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-   <!-- select user type for registration Ends -->
+    <!-- Select User Type For Registration Ends -->
 
-   <!-- add hospital page begins -->
-   <div class="main-wrapper" id="addhospital" style="display: none;">
-    <div class="header">
-        <div class="header-left">
-            <a href="index.html" class="logo">
-                <img src="assets/img/logo.png" width="35" height="35" alt=""> <span>SSD Healthcare</span>
-            </a>
-        </div>
-        <a id="toggle_btn" href="javascript:void(0);"><i class="fa fa-bars"></i></a>
-        <a id="mobile_btn" class="mobile_btn float-left" href="#sidebar"><i class="fa fa-bars"></i></a>
-        <ul class="nav user-menu float-right">
-            <li class="nav-item dropdown has-arrow">
-                <a href="#" class="dropdown-toggle nav-link user-link" data-toggle="dropdown">
-                    <span class="user-img">
+    <!-- Add Hospital - Healthcare Provider Page Begins -->
+    <div class="main-wrapper" id="addhospital" style="display: none;">
+        <div class="header">
+            <div class="header-left">
+                <a href="index.html" class="logo">
+                    <img src="assets/img/logo.png" width="35" height="35" alt=""> <span>SSD Healthcare</span>
+                </a>
+            </div>
+            <a id="toggle_btn" href="javascript:void(0);"><i class="fa fa-bars"></i></a>
+            <a id="mobile_btn" class="mobile_btn float-left" href="#sidebar"><i class="fa fa-bars"></i></a>
+            <ul class="nav user-menu float-right">
+                <li class="nav-item dropdown has-arrow">
+                    <a href="#" class="dropdown-toggle nav-link user-link" data-toggle="dropdown">
+                        <span class="user-img">
                         <img class="rounded-circle" src="assets/img/user.jpg" width="40" alt="Admin">
                         <span class="status online"></span>
-                    </span>
-                    <span>Register As Hospital</span>
-                </a>
-                <div class="dropdown-menu">
+                        </span>
+                        <span>Register As Hospital</span>
+                    </a>
+                </li>
+            </ul>
+            <div class="dropdown mobile-user-menu float-right">
+                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
+                <div class="dropdown-menu dropdown-menu-right">
                     <a class="dropdown-item" href="login.html">Logout</a>
                 </div>
-            </li>
-        </ul>
-        <div class="dropdown mobile-user-menu float-right">
-            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
-            <div class="dropdown-menu dropdown-menu-right">
-                <a class="dropdown-item" href="login.html">Logout</a>
             </div>
         </div>
-    </div>
-    <div class="sidebar" id="sidebar">
-        <div class="sidebar-inner slimscroll">
-            <div id="sidebar-menu" class="sidebar-menu">
-                <ul>
-                    <li>
-                        <a href="index.html"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
-                    </li>
-                    <li class="active">
-                        <a href="healthcare-provider.html"><i class="fa fa-hospital-o"></i> <span>Healthcare Providers</span></a>
-                    </li>
-                    <li>
-                        <a href="doctors.html"><i class="fa fa-user-md"></i> <span>Doctors</span></a>
-                    </li>
-                    <li>
-                        <a href="patients.html"><i class="fa fa-wheelchair"></i> <span>Patients</span></a>
-                    </li>
-                    <li>
-                        <a href="appointments.html"><i class="fa fa-calendar"></i> <span>Appointments</span></a>
-                    </li>
-                    <li>
-                        <a href="insurance-provider.html"><i class="fa fa-hospital-o"></i> <span>Insurance Providers</span></a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="page-wrapper">
-        <div class="content">
-            <div class="row">
-                <div class="col-lg-8 offset-lg-2">
-                    <h4 class="page-title">Add Healthcare Provider</h4>
+        <div class="page-wrapper">
+            <div class="content">
+                <div class="row">
+                    <div class="col-lg-8 offset-lg-2">
+                        <h4 class="page-title">Add Healthcare Provider</h4>
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-8 offset-lg-2">
-                    
+                <div class="row">
+                    <div class="col-lg-8 offset-lg-2">
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
@@ -359,7 +298,7 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label>Hospital Registration ID<span class="text-danger">*</span></label>
-                                    <input id="hospitalid"class="form-control" type="text">
+                                    <input id="hospitalid" class="form-control" type="text">
                                 </div>
                             </div>
                             <div class="col-sm-4">
@@ -438,79 +377,49 @@
                         <div class="m-t-20 text-center">
                             <button class="btn btn-primary submit-btn" onclick="App.addHospital()">Register</button>
                         </div>
-                    
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-   <!-- add hospital page Ends -->
+    <!-- Add Hospital - Healthcare Provider Page Ends -->
 
-   <!-- Register as doctor begins -->
-   <div class="main-wrapper" id="addDoctor" style="display: none;">
-    <div class="header">
-        <div class="header-left">
-            <a href="index.html" class="logo">
-                <img src="assets/img/logo.png" width="35" height="35" alt=""> <span>SSD Healthcare</span>
-            </a>
-        </div>
-        <a id="toggle_btn" href="javascript:void(0);"><i class="fa fa-bars"></i></a>
-        <a id="mobile_btn" class="mobile_btn float-left" href="#sidebar"><i class="fa fa-bars"></i></a>
-        <ul class="nav user-menu float-right">
-            <li class="nav-item dropdown has-arrow">
-                <a href="#" class="dropdown-toggle nav-link user-link" data-toggle="dropdown">
-                    <span class="user-img"><img class="rounded-circle" src="assets/img/user.jpg" width="40" alt="Admin">
-                        <span class="status online"></span></span>
-                    <span>Register as Doctor</span>
+    <!-- Register As Doctor Begins -->
+    <div class="main-wrapper" id="addDoctor" style="display: none;">
+        <div class="header">
+            <div class="header-left">
+                <a href="index.html" class="logo">
+                    <img src="assets/img/logo.png" width="35" height="35" alt=""> <span>SSD Healthcare</span>
                 </a>
-                <div class="dropdown-menu">
+            </div>
+            <a id="toggle_btn" href="javascript:void(0);"><i class="fa fa-bars"></i></a>
+            <a id="mobile_btn" class="mobile_btn float-left" href="#sidebar"><i class="fa fa-bars"></i></a>
+            <ul class="nav user-menu float-right">
+                <li class="nav-item dropdown has-arrow">
+                    <a href="#" class="dropdown-toggle nav-link user-link" data-toggle="dropdown">
+                        <span class="user-img"><img class="rounded-circle" src="assets/img/user.jpg" width="40" alt="Admin">
+                        <span class="status online"></span></span>
+                        <span>Register as Doctor</span>
+                    </a>
+                </li>
+            </ul>
+            <div class="dropdown mobile-user-menu float-right">
+                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
+                <div class="dropdown-menu dropdown-menu-right">
                     <a class="dropdown-item" href="login.html">Logout</a>
                 </div>
-            </li>
-        </ul>
-        <div class="dropdown mobile-user-menu float-right">
-            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
-            <div class="dropdown-menu dropdown-menu-right">
-                <a class="dropdown-item" href="login.html">Logout</a>
             </div>
         </div>
-    </div>
-    <div class="sidebar" id="sidebar">
-        <div class="sidebar-inner slimscroll">
-            <div id="sidebar-menu" class="sidebar-menu">
-                <ul>
-                    <li>
-                        <a href="index.html"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
-                    </li>
-                    <li>
-                        <a href="healthcare-provider.html"><i class="fa fa-hospital-o"></i> <span>Healthcare Providers</span></a>
-                    </li>
-                    <li class="active">
-                        <a href="doctors.html"><i class="fa fa-user-md"></i> <span>Doctors</span></a>
-                    </li>
-                    <li>
-                        <a href="patients.html"><i class="fa fa-wheelchair"></i> <span>Patients</span></a>
-                    </li>
-                    <li>
-                        <a href="appointments.html"><i class="fa fa-calendar"></i> <span>Appointments</span></a>
-                    </li>
-                    <li>
-                        <a href="insurance-provider.html"><i class="fa fa-hospital-o"></i> <span>Insurance Providers</span></a>
-                    </li>  
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="page-wrapper">
-        <div class="content">
-            <div class="row">
-                <div class="col-lg-8 offset-lg-2">
-                    <h4 class="page-title">Add Doctor</h4>
+        <div class="page-wrapper">
+            <div class="content">
+                <div class="row">
+                    <div class="col-lg-8 offset-lg-2">
+                        <h4 class="page-title">Add Doctor</h4>
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-8 offset-lg-2">
-                    
+                <div class="row">
+                    <div class="col-lg-8 offset-lg-2">
+
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
@@ -588,9 +497,9 @@
                                     <div class="col-sm-6 col-md-6 col-lg-3">
                                         <div class="form-group">
                                             <div class="form-group">
-                                            <label>Country</label>
-                                            <input type="text" class="form-control" id="doccountry">
-                                        </div>
+                                                <label>Country</label>
+                                                <input type="text" class="form-control" id="doccountry">
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-sm-6 col-md-6 col-lg-3">
@@ -602,9 +511,9 @@
                                     <div class="col-sm-6 col-md-6 col-lg-3">
                                         <div class="form-group">
                                             <div class="form-group">
-                                            <label>City</label>
-                                            <input type="text" class="form-control" id="doccity">
-                                        </div>
+                                                <label>City</label>
+                                                <input type="text" class="form-control" id="doccity">
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-sm-6 col-md-6 col-lg-3">
@@ -623,78 +532,51 @@
                         <div class="m-t-20 text-center">
                             <button class="btn btn-primary submit-btn" onclick="App.addDoctor()">Register Doctor</button>
                         </div>
-                   
+
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-   <!-- Register as doctor ends -->
-   <!-- Register as innsurance Provider begins -->
-   <div class="main-wrapper" id="addInsurance" style="display: none;">
-    <div class="header">
-        <div class="header-left">
-            <a href="index.html" class="logo">
-                <img src="assets/img/logo.png" width="35" height="35" alt=""> <span>SSD Healthcare</span>
-            </a>
-        </div>
-        <a id="toggle_btn" href="javascript:void(0);"><i class="fa fa-bars"></i></a>
-        <a id="mobile_btn" class="mobile_btn float-left" href="#sidebar"><i class="fa fa-bars"></i></a>
-        <ul class="nav user-menu float-right">
-            <li class="nav-item dropdown has-arrow">
-                <a href="#" class="dropdown-toggle nav-link user-link" data-toggle="dropdown">
-                    <span class="user-img"><img class="rounded-circle" src="assets/img/user.jpg" width="40" alt="Admin">
-                        <span class="status online"></span></span>
-                    <span>Register Insurance Provider</span>
+    <!-- Register As Doctor Ends -->
+
+    <!-- Register As Insurance Provider Begins -->
+    <div class="main-wrapper" id="addInsurance" style="display: none;">
+        <div class="header">
+            <div class="header-left">
+                <a href="index.html" class="logo">
+                    <img src="assets/img/logo.png" width="35" height="35" alt=""> <span>SSD Healthcare</span>
                 </a>
-                <div class="dropdown-menu">
+            </div>
+            <a id="toggle_btn" href="javascript:void(0);"><i class="fa fa-bars"></i></a>
+            <a id="mobile_btn" class="mobile_btn float-left" href="#sidebar"><i class="fa fa-bars"></i></a>
+            <ul class="nav user-menu float-right">
+                <li class="nav-item dropdown has-arrow">
+                    <a href="#" class="dropdown-toggle nav-link user-link" data-toggle="dropdown">
+                        <span class="user-img"><img class="rounded-circle" src="assets/img/user.jpg" width="40" alt="Admin">
+                        <span class="status online"></span></span>
+                        <span>Register Insurance Provider</span>
+                    </a>
+                </li>
+            </ul>
+            <div class="dropdown mobile-user-menu float-right">
+                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
+                <div class="dropdown-menu dropdown-menu-right">
                     <a class="dropdown-item" href="login.html">Logout</a>
                 </div>
-            </li>
-        </ul>
-        <div class="dropdown mobile-user-menu float-right">
-            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
-            <div class="dropdown-menu dropdown-menu-right">
-                <a class="dropdown-item" href="login.html">Logout</a>
             </div>
         </div>
-    </div>
-    <div class="sidebar" id="sidebar">
-        <div class="sidebar-inner slimscroll">
-            <div id="sidebar-menu" class="sidebar-menu">
-                <ul>
-                    <li>
-                        <a href="index.html"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
-                    </li>
-                    <li>
-                        <a href="healthcare-provider.html"><i class="fa fa-hospital-o"></i> <span>Healthcare Providers</span></a>
-                    </li>
-                    <li>
-                        <a href="doctors.html"><i class="fa fa-user-md"></i> <span>Doctors</span></a>
-                    </li>
-                    <li>
-                        <a href="patients.html"><i class="fa fa-wheelchair"></i> <span>Patients</span></a>
-                    </li>
-                    <li>
-                        <a href="appointments.html"><i class="fa fa-calendar"></i> <span>Appointments</span></a>
-                    </li>
-                    <li class="active">
-                        <a href="insurance-provider.html"><i class="fa fa-hospital-o"></i> <span>Insurance Providers</span></a>
-                    </li>    
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="page-wrapper">
-        <div class="content">
-            <div class="row">
-                <div class="col-lg-8 offset-lg-2">
-                    <h4 class="page-title">Add Insurance Provider</h4>
+
+        <div class="page-wrapper">
+            <div class="content">
+                <div class="row">
+                    <div class="col-lg-8 offset-lg-2">
+                        <h4 class="page-title">Add Insurance Provider</h4>
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-8 offset-lg-2">
-                   
+                <div class="row">
+                    <div class="col-lg-8 offset-lg-2">
+
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
@@ -768,83 +650,57 @@
                         <div class="m-t-20 text-center">
                             <button class="btn btn-primary submit-btn" onclick="App.addInsurance()">Register Insurance Provider</button>
                         </div>
-                    
+
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-   <!-- Register as  insuranceprovider ends -->
+    <!-- Register as  insuranceprovider ends -->
 
-
-   <!-- Register patient begins -->
-   <div class="main-wrapper" id="addPatient" style="display: none;">
-    <div class="header">
-        <div class="header-left">
-            <a href="index.html" class="logo">
-                <img src="assets/img/logo.png" width="35" height="35" alt=""> <span>SSD Healthcare</span>
-            </a>
-        </div>
-        <a id="toggle_btn" href="javascript:void(0);"><i class="fa fa-bars"></i></a>
-        <a id="mobile_btn" class="mobile_btn float-left" href="#sidebar"><i class="fa fa-bars"></i></a>
-        <ul class="nav user-menu float-right">
-            <li class="nav-item dropdown has-arrow">
-                <a href="#" class="dropdown-toggle nav-link user-link" data-toggle="dropdown">
-                    <span class="user-img">
+    <!-- Register patient begins -->
+    <div class="main-wrapper" id="addPatient" style="display: none;">
+        <div class="header">
+            <div class="header-left">
+                <a href="index.html" class="logo">
+                    <img src="assets/img/logo.png" width="35" height="35" alt=""> <span>SSD Healthcare</span>
+                </a>
+            </div>
+            <a id="toggle_btn" href="javascript:void(0);"><i class="fa fa-bars"></i></a>
+            <a id="mobile_btn" class="mobile_btn float-left" href="#sidebar"><i class="fa fa-bars"></i></a>
+            <ul class="nav user-menu float-right">
+                <li class="nav-item dropdown has-arrow">
+                    <a href="#" class="dropdown-toggle nav-link user-link" data-toggle="dropdown">
+                        <span class="user-img">
                         <img class="rounded-circle" src="assets/img/user.jpg" width="40" alt="Admin">
                         <span class="status online"></span>
-                    </span>
-                    <span>Register Patient</span>
-                </a>
-                <div class="dropdown-menu">
+                        </span>
+                        <span>Register Patient</span>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="login.html">Logout</a>
+                    </div>
+                </li>
+            </ul>
+            <div class="dropdown mobile-user-menu float-right">
+                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
+                <div class="dropdown-menu dropdown-menu-right">
+
                     <a class="dropdown-item" href="login.html">Logout</a>
                 </div>
-            </li>
-        </ul>
-        <div class="dropdown mobile-user-menu float-right">
-            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
-            <div class="dropdown-menu dropdown-menu-right">
+            </div>
+        </div>
 
-                <a class="dropdown-item" href="login.html">Logout</a>
-            </div>
-        </div>
-    </div>
-    <div class="sidebar" id="sidebar">
-        <div class="sidebar-inner slimscroll">
-            <div id="sidebar-menu" class="sidebar-menu">
-                <ul>
-                    <li>
-                        <a href="index.html"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
-                    </li>
-                    <li>
-                        <a href="healthcare-provider.html"><i class="fa fa-hospital-o"></i> <span>Healthcare Providers</span></a>
-                    </li>
-                    <li>
-                        <a href="doctors.html"><i class="fa fa-user-md"></i> <span>Doctors</span></a>
-                    </li>
-                    <li class="active">
-                        <a href="patients.html"><i class="fa fa-wheelchair"></i> <span>Patients</span></a>
-                    </li>
-                    <li>
-                        <a href="appointments.html"><i class="fa fa-calendar"></i> <span>Appointments</span></a>
-                    </li>
-                    <li>
-                        <a href="insurance-provider.html"><i class="fa fa-hospital-o"></i> <span>Insurance Providers</span></a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="page-wrapper">
-        <div class="content">
-            <div class="row">
-                <div class="col-lg-8 offset-lg-2">
-                    <h4 class="page-title">Add Patient</h4>
+        <div class="page-wrapper">
+            <div class="content">
+                <div class="row">
+                    <div class="col-lg-8 offset-lg-2">
+                        <h4 class="page-title">Add Patient</h4>
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-8 offset-lg-2">
-                    
+                <div class="row">
+                    <div class="col-lg-8 offset-lg-2">
+
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
@@ -953,12 +809,14 @@
                                                     <INPUT type="button" class="btn btn-danger btn-rounded" value="Delete Attachment" onclick="deleteRow('dataTable')" /><br><br> -->
                                                     <TABLE id="dataTable" width="500px" border="0">
                                                         <TR>
-                                                            <TD><INPUT type="checkbox" name="chk" /></TD>
+                                                            <TD>
+                                                                <INPUT type="checkbox" name="chk" />
+                                                            </TD>
                                                             <TD>
                                                                 <label> Attachment :</label><input class="form-control btn-rounded" id="myFile" type="file"><br>
                                                             </TD>
                                                             <td><button class="btn btn-primary" type="button" onclick="App.fileUploadBypatient()">Upload to Blockchin</button></td>
-                                                            
+
                                                         </TR>
                                                     </TABLE>
                                                 </div>
@@ -969,278 +827,271 @@
                             </div>
                         </div>
                         <div class="m-t-20 text-center">
-                            <button class="btn btn-primary submit-btn"  onclick="App.addPatient()">Register Patient</button>
-                        </div>                    
+                            <button class="btn btn-primary submit-btn" onclick="App.addPatient()">Register Patient</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-   <!-- Register patient ends -->
+    <!-- Register patient ends -->
 
-
-<!-- hospital dashboard Begins -->
-   <div id="dashboardhealthprovider" style="display: none;">
-    <div class="main-wrapper">
-        <div class="header">
-			<div class="header-left">
-				<a href="index.html" class="logo">
-					<img src="assets/img/logo.png" width="35" height="35" alt=""> <span>SSD Healthcare</span>
-				</a>
-			</div>
-			<a id="toggle_btn" href="javascript:void(0);"><i class="fa fa-bars"></i></a>
-            <a id="mobile_btn" class="mobile_btn float-left" href="#sidebar"><i class="fa fa-bars"></i></a>
-            <ul class="nav user-menu float-right">
-                <li class="nav-item dropdown has-arrow">
-                    <a href="#" class="dropdown-toggle nav-link user-link" data-toggle="dropdown">
-                        <span class="user-img"><img class="rounded-circle" src="assets/img/user.jpg" width="40" alt="Admin">
-							<span class="status online"></span></span>
-                        <span id="hospitalNameprofile">Health Provider</span>
+    <!-- Hospital - Healthcare Provider Dashboard Begins -->
+    <div id="dashboardhealthprovider" style="display: none;">
+        <div class="main-wrapper">
+            <div class="header">
+                <div class="header-left">
+                    <a href="index.html" class="logo">
+                        <img src="assets/img/logo.png" width="35" height="35" alt=""> <span>SSD Healthcare</span>
                     </a>
-					<div class="dropdown-menu">
-						<a class="dropdown-item" href="login.html">Logout</a>
-					</div>
-                </li>
-            </ul>
-            <div class="dropdown mobile-user-menu float-right">
-                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
-                <div class="dropdown-menu dropdown-menu-right">
-                    <a class="dropdown-item" href="login.html">Logout</a>
                 </div>
-            </div>
-        </div>
-        <div class="sidebar" id="sidebar">
-            <div class="sidebar-inner slimscroll">
-                <div id="sidebar-menu" class="sidebar-menu">
-                    <ul>
-                        <li>
-                            <a style="cursor: pointer;" onclick="App.viewProfileofHospital()"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
-                        </li>
-                        <li class="active">
-                            <a href="healthcare-provider.html" style="pointer-events: none;color: #ccc;"><i class="fa fa-hospital-o"></i> <span>Healthcare Providers</span></a>
-                        </li>
-                        <li>
-                            <a style="cursor: pointer;" onclick="App.viewDoctorsofHospital()"><i class="fa fa-user-md"></i> <span>Doctors</span></a>
-                        </li>
-                        <li>
-                            <a style="cursor: pointer;" onclick="App.viewPatientsofHospital()"><i class="fa fa-wheelchair"></i> <span>Patients</span></a>
-                        </li>
-                        <li>
-                            <a style="cursor: pointer;" onclick="App.viewAppointmentsofHospital()"><i class="fa fa-calendar"></i> <span>Appointments</span></a>
-                        </li>
-                        <li>
-                            <a href="insurance-provider.html" style="pointer-events: none;color: #ccc;"><i class="fa fa-hospital-o"></i> <span>Insurance Providers</span></a>
-                        </li>					                        
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="page-wrapper">
-            <div class="content">
-                <div class="row">
-                    <div class="col-sm-10 col-8">
-                        <h4 class="page-title">Healthcare Profile</h4>
-                    </div>
-                    <div class="col-sm-2 col-1 text-right m-b-30">
-                        <a style="cursor: pointer;" onclick="App.showEditHospital()" class="btn btn-primary btn-rounded"><i class="fa fa-plus"></i> Edit Healthcare</a>
+                <a id="toggle_btn" href="javascript:void(0);"><i class="fa fa-bars"></i></a>
+                <a id="mobile_btn" class="mobile_btn float-left" href="#sidebar"><i class="fa fa-bars"></i></a>
+                <ul class="nav user-menu float-right">
+                    <li class="nav-item dropdown has-arrow">
+                        <a href="#" class="dropdown-toggle nav-link user-link" data-toggle="dropdown">
+                            <span class="user-img"><img class="rounded-circle" src="assets/img/user.jpg" width="40" alt="Admin">
+							<span class="status online"></span></span>
+                            <span id="hospitalNameprofile">Health Provider</span>
+                        </a>
+                    </li>
+                </ul>
+                <div class="dropdown mobile-user-menu float-right">
+                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" href="login.html">Logout</a>
                     </div>
                 </div>
-                <div class="card-box profile-header">
-                    <!-- hospital main page beginning -->
-                    <div class="row" id="hospitalmain">
-                        <div class="col-md-12">
-                            <div class="profile-view">
-                                <div class="profile-img-wrap">
-                                    <div class="profile-img">
-                                        <a href="#"><img class="avatar" src="assets/img/user.jpg" alt=""></a>
-                                    </div>
-                                </div>
-                                <div class="profile-basic">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <ul class="personal-info">
-                                                <li>
-                                                    <span class="title">Hospital Name</span>
-                                                    <span class="text" id="hospitalname1">Hospital</span>
-                                                </li>
-                                                <li>
-                                                    <span class="title">Registration ID</span>
-                                                    <span class="text" id="hospitalRegID"></span>
-                                                </li>
-                                                <li>
-                                                    <span class="title">Website</span>
-                                                    <span class="text"  id="hospitalwebsite1"><a href="#" >770-889-6484</a></span>
-                                                </li>
-                                                <li>
-                                                    <span class="title">Phone</span>
-                                                    <span class="text" id="hospitalphone1"><a href="#" >770-889-6484</a></span>
-                                                </li>
-                                                <li>
-                                                    <span class="title">Email</span>
-                                                    <span class="text" id="hospitalemail1"><a href="#" >cristinagroves@example.com</a></span>
-                                                </li>
-                                                
-                                            </ul>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <ul class="personal-info">
-                                                <li>
-                                                    <span class="title">Address</span>
-                                                    <span class="text" id="hospitalAddress">714 Burwell Heights Road, Bridge City, TX, 77611</span>
-                                                </li>
-                                                <li>
-                                                    <span class="title">Open Timings</span>
-                                                    <span class="text" id="hospitalopeningTime">08:00</span>
-                                                </li>
-                                                <li>
-                                                    <span class="title">Close Timings</span>
-                                                    <span class="text" id="hospitalClosingTime">20:00</span>
-                                                </li>
-                                                <li>
-                                                    <span class="title">Hospital Description</span>
-                                                    <span class="text" id="hospitalDescription">3rd March</span>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>                        
+            </div>
+            <div class="sidebar" id="sidebar">
+                <div class="sidebar-inner slimscroll">
+                    <div id="sidebar-menu" class="sidebar-menu">
+                        <ul>
+                            <li>
+                                <a style="cursor: pointer;" onclick="App.viewProfileofHospital()"><i class="fa fa-dashboard"></i> <span>Healthcare Dashboard</span></a>
+                            </li>
+                            <li>
+                                <a style="cursor: pointer;" onclick="App.viewDoctorsofHospital()"><i class="fa fa-user-md"></i> <span>Doctors</span></a>
+                            </li>
+                            <li>
+                                <a style="cursor: pointer;" onclick="App.viewPatientsofHospital()"><i class="fa fa-wheelchair"></i> <span>Patients</span></a>
+                            </li>
+                            <li>
+                                <a style="cursor: pointer;" onclick="App.viewAppointmentsofHospital()"><i class="fa fa-calendar"></i> <span>Appointments</span></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="page-wrapper">
+                <div class="content">
+                    <div class="row">
+                        <div class="col-sm-10 col-8">
+                            <h4 class="page-title">Healthcare Profile</h4>
+                        </div>
+                        <div class="col-sm-2 col-1 text-right m-b-30">
+                            <a style="cursor: pointer;" onclick="App.showEditHospital()" class="btn btn-primary btn-rounded"><i class="fa fa-plus"></i> Edit Healthcare</a>
                         </div>
                     </div>
-                    <!-- hospital main page Ends -->
-                    <!-- hospital edit page starts -->
-                    <div class="row" id="edithospital" style="display: none;">
-                        <div class="content">
-                            <div class="row">
-                                <div class="col-lg-8 offset-lg-2">
-                                    <h4 class="page-title">Edit Healthcare Provider</h4>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-8 offset-lg-2">
-                                   
+                    <div class="card-box profile-header">
+                        <!-- Hospital Main Page Beginning - Healthcare Profile -->
+                        <div class="row" id="hospitalmain">
+                            <div class="col-md-12">
+                                <div class="profile-view">
+                                    <div class="profile-img-wrap">
+                                        <div class="profile-img">
+                                            <a href="#"><img class="avatar" src="assets/img/user.jpg" alt=""></a>
+                                        </div>
+                                    </div>
+                                    <div class="profile-basic">
                                         <div class="row">
-                                            <div class="col-sm-6">
-                                                <div class="form-group">
-                                                    <label>Hospital Name<span class="text-danger">*</span></label>
-                                                    <input class="form-control" type="text" id="edithospitalname">
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <div class="form-group">
-                                                    <label>Hospital Registration ID<span class="text-danger">*</span></label>
-                                                    <input class="form-control" type="text" id="edithospitalregno">
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-4">
-                                                <div class="form-group">
-                                                    <label>Website<span class="text-danger">*</span></label>
-                                                    <input class="form-control" type="user-link" id="edithospitalwebsite">
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-4">
-                                                <div class="form-group">
-                                                    <label>Phone </label>
-                                                    <input class="form-control" type="text" id="edithospitalphone">
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-4">
-                                                <div class="form-group">
-                                                    <label>Email <span class="text-danger">*</span></label>
-                                                    <input class="form-control" type="email" id="edithospitalemail">
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-12">
-                                                <div class="row">
-                                                    <div class="col-sm-12">
-                                                        <div class="form-group">
-                                                            <label>Address</label>
-                                                            <input type="text" class="form-control " id="edithospitaladdress">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-6 col-md-6 col-lg-3">
-                                                        <div class="form-group">
-                                                            <label>Country</label>
-                                                            <input type="text" class="form-control " id="edithopitalcountry">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-6 col-md-6 col-lg-3">
-                                                        <div class="form-group">
-                                                            <label>State</label>
-                                                            <input type="text" class="form-control " id="edithospitalstate">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-6 col-md-6 col-lg-3">
-                                                        <div class="form-group">
-                                                            <label>City</label>
-                                                            <input type="text" class="form-control " id="edithospitalcity">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-6 col-md-6 col-lg-3">
-                                                        <div class="form-group">
-                                                            <label>Postal Code</label>
-                                                            <input type="text" class="form-control" id="edithospitalpostalcode">
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                            <div class="col-md-6">
+                                                <ul class="personal-info">
+                                                    <li>
+                                                        <span class="title">Hospital Name</span>
+                                                        <span class="text" id="hospitalname1">Hospital</span>
+                                                    </li>
+                                                    <li>
+                                                        <span class="title">Registration ID</span>
+                                                        <span class="text" id="hospitalRegID"></span>
+                                                    </li>
+                                                    <li>
+                                                        <span class="title">Website</span>
+                                                        <span class="text" id="hospitalwebsite1"><a href="#" >770-889-6484</a></span>
+                                                    </li>
+                                                    <li>
+                                                        <span class="title">Phone</span>
+                                                        <span class="text" id="hospitalphone1"><a href="#" >770-889-6484</a></span>
+                                                    </li>
+                                                    <li>
+                                                        <span class="title">Email</span>
+                                                        <span class="text" id="hospitalemail1"><a href="#" >cristinagroves@example.com</a></span>
+                                                    </li>
+
+                                                </ul>
                                             </div>
                                             <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>Open Timings</label>
-                                                    <div class="time-icon">
-                                                        <input type="text" class="form-control" id="edithospitalopeningtime">
+                                                <ul class="personal-info">
+                                                    <li>
+                                                        <span class="title">Address</span>
+                                                        <span class="text" id="hospitalAddress">714 Burwell Heights Road, Bridge City, TX, 77611</span>
+                                                    </li>
+                                                    <li>
+                                                        <span class="title">Open Timings</span>
+                                                        <span class="text" id="hospitalopeningTime">08:00</span>
+                                                    </li>
+                                                    <li>
+                                                        <span class="title">Close Timings</span>
+                                                        <span class="text" id="hospitalClosingTime">20:00</span>
+                                                    </li>
+                                                    <li>
+                                                        <span class="title">Hospital Description</span>
+                                                        <span class="text" id="hospitalDescription">3rd March</span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Hospital Main Page Ending - Healthcare Profile -->
+
+                        <!-- Hospital Edit Page Begin -->
+                        <div class="row" id="edithospital" style="display: none;">
+                            <div class="content">
+                                <div class="row">
+                                    <div class="col-lg-8 offset-lg-2">
+                                        <h4 class="page-title">Edit Healthcare Provider</h4>
+                                    </div>
+                                </div <div class="row">
+                                <div class="col-lg-8 offset-lg-2">
+
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>Hospital Name<span class="text-danger">*</span></label>
+                                                <input class="form-control" type="text" id="edithospitalname">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>Hospital Registration ID<span class="text-danger">*</span></label>
+                                                <input class="form-control" type="text" id="edithospitalregno">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label>Website<span class="text-danger">*</span></label>
+                                                <input class="form-control" type="user-link" id="edithospitalwebsite">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label>Phone </label>
+                                                <input class="form-control" type="text" id="edithospitalphone">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label>Email <span class="text-danger">*</span></label>
+                                                <input class="form-control" type="email" id="edithospitalemail">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="form-group">
+                                                        <label>Address</label>
+                                                        <input type="text" class="form-control " id="edithospitaladdress">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6 col-md-6 col-lg-3">
+                                                    <div class="form-group">
+                                                        <label>Country</label>
+                                                        <input type="text" class="form-control " id="edithopitalcountry">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6 col-md-6 col-lg-3">
+                                                    <div class="form-group">
+                                                        <label>State</label>
+                                                        <input type="text" class="form-control " id="edithospitalstate">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6 col-md-6 col-lg-3">
+                                                    <div class="form-group">
+                                                        <label>City</label>
+                                                        <input type="text" class="form-control " id="edithospitalcity">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6 col-md-6 col-lg-3">
+                                                    <div class="form-group">
+                                                        <label>Postal Code</label>
+                                                        <input type="text" class="form-control" id="edithospitalpostalcode">
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>Closed Timings</label>
-                                                    <div class="time-icon">
-                                                        <input type="text" class="form-control" id="edithospitalclosingtime">
-                                                    </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Open Timings</label>
+                                                <div class="time-icon">
+                                                    <input type="text" class="form-control" id="edithospitalopeningtime">
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="form-group">
-                                            <label>Hospital Description</label>
-                                            <textarea class="form-control" rows="3" cols="30" id="edithospitaldescription"></textarea>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Closed Timings</label>
+                                                <div class="time-icon">
+                                                    <input type="text" class="form-control" id="edithospitalclosingtime">
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="m-t-20 text-center">
-                                            <button class="btn btn-primary submit-btn" onclick="App.updateHospital()">Save</button>
-                                        </div>
-                                    
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Hospital Description</label>
+                                        <textarea class="form-control" rows="3" cols="30" id="edithospitaldescription"></textarea>
+                                    </div>
+                                    <div class="m-t-20 text-center">
+                                        <button class="btn btn-primary submit-btn" onclick="App.updateHospital()">Save</button>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!-- hospital edit page ends -->
-                    <!-- Doctor page view by hospital -->
+                    <!-- Hospital Edit Page Ends -->
+
+                    <!-- Doctor Page View By Hospital Begins -->
                     <div class="row" id="viewDoctorsbyHospital" style="display: none;">
                         <table class="table">
                             <tr>
                                 <th>Doctor ID</th>
                                 <th>Name</th>
                                 <th>Registration ID</th>
+                                <th>Specialization</th>
                             </tr>
                             <tbody id="disDoctorsByHospital"></tbody>
                         </table>
-                            
                     </div>
-                    <!-- Doctor page view by hospital Ends -->
-                    <!-- View patients by hospital beginning -->
+                    <!-- Doctor Page View By Hospital Ends -->
+
+                    <!-- View Patients By Hospital Beginning -->
                     <div class="row" id="viewPatientsbyHospital" style="display: none;">
                         <table class="table">
                             <tr>
                                 <th>ID</th>
                                 <th>Patient Name</th>
                                 <th>DoB</th>
-                                <th>Insurance Provider</th>                                
+                                <th>Insurance Provider</th>
                             </tr>
                             <tbody id="dispatientsByHospital"></tbody>
                         </table>
                     </div>
-                     <!-- View patients by hospital Ends -->
-                     <!-- view appointments by hospital beginning -->
+                    <!-- View Patients By Hospital Ends -->
+
+                    <!-- View Appointments By Hospital Beginning -->
                     <div class="row" id="viewAppointmentsbyHospital" style="display: none;">
                         <table class="table">
                             <tr>
@@ -1252,174 +1103,149 @@
                             <tbody id="disappointmentsByHospital"></tbody>
                         </table>
                     </div>
-                     <!-- view appointments by hospital Ends -->
+                    <!-- View Appointments By Hospital Ends -->
                 </div>
             </div>
         </div>
     </div>
-   </div>
-   <!-- hospital dashboard ends -->
+    </div>
+    <!-- Hospital - Healthcare Provider Dashboard Ends -->
 
-    <!-- Doctor dashboard begins -->
-   <div id="dashboarddoctor" style="display: none;">
-    <div class="main-wrapper">
-        <div class="header">
-			<div class="header-left">
-				<a href="index.html" class="logo">
-					<img src="assets/img/logo.png" width="35" height="35" alt=""> <span>SSD Healthcare</span>
-				</a>
-			</div>
-			<a id="toggle_btn" href="javascript:void(0);"><i class="fa fa-bars"></i></a>
-            <a id="mobile_btn" class="mobile_btn float-left" href="#sidebar"><i class="fa fa-bars"></i></a>
-            <ul class="nav user-menu float-right">
-                <li class="nav-item dropdown has-arrow">
-                    <a href="#" class="dropdown-toggle nav-link user-link" data-toggle="dropdown">
-                        <span class="user-img"><img class="rounded-circle" src="assets/img/user.jpg" width="40" alt="Admin">
-							<span class="status online"></span></span>
-                        <span id="doctornameforprofile">Admin</span>
+    <!-- Doctor Dashboard Begins -->
+    <div id="dashboarddoctor" style="display: none;">
+        <div class="main-wrapper">
+            <div class="header">
+                <div class="header-left">
+                    <a href="index.html" class="logo">
+                        <img src="assets/img/logo.png" width="35" height="35" alt=""> <span>SSD Healthcare</span>
                     </a>
-					<div class="dropdown-menu">
-						<a class="dropdown-item" href="login.html">Logout</a>
-					</div>
-                </li>
-            </ul>
-            <div class="dropdown mobile-user-menu float-right">
-                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
-                <div class="dropdown-menu dropdown-menu-right">
-                    <a class="dropdown-item" href="login.html">Logout</a>
                 </div>
-            </div>
-        </div>
-        <div class="sidebar" id="sidebar">
-            <div class="sidebar-inner slimscroll">
-                <div id="sidebar-menu" class="sidebar-menu">
-                    <ul>
-                        <li>
-                            <a style="cursor: pointer;" onclick="App.viewProfileofDoctor()"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
-                        </li>
-                        <li>
-                            <a href="healthcare-provider.html" style="pointer-events: none;color: #ccc;"><i class="fa fa-hospital-o"></i> <span>Healthcare Providers</span></a>
-                        </li>
-                        <li class="active">
-                            <a href="doctors.html" style="pointer-events: none;color: #ccc;"><i class="fa fa-user-md"></i> <span>Doctors</span></a>
-                        </li>
-                        <li>
-                            <a style="cursor: pointer;" onclick="App.ViewPatientsByDoctor()" ><i class="fa fa-wheelchair"></i> <span>Patient Files</span></a>
-                        </li>
-                        <li>
-                            <a style="cursor: pointer;" onclick="App.ViewAppointmentsByDoctor()"><i class="fa fa-calendar"></i> <span>Appointments</span></a>
-                        </li>
-                        <li>
-                            <a href="insurance-provider.html" style="pointer-events: none;color: #ccc;"><i class="fa fa-hospital-o"></i> <span>Insurance Providers</span></a>
-                        </li>					                        
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="page-wrapper">
-            <div class="content">
-                <div class="row">
-                    <div class="col-sm-7 col-6">
-                        <h4 class="page-title">Doctor Profile</h4>
+                <a id="toggle_btn" href="javascript:void(0);"><i class="fa fa-bars"></i></a>
+                <a id="mobile_btn" class="mobile_btn float-left" href="#sidebar"><i class="fa fa-bars"></i></a>
+                <ul class="nav user-menu float-right">
+                    <li class="nav-item dropdown has-arrow">
+                        <a href="#" class="dropdown-toggle nav-link user-link" data-toggle="dropdown">
+                            <span class="user-img"><img class="rounded-circle" src="assets/img/user.jpg" width="40" alt="Admin">
+							<span class="status online"></span></span>
+                            <span id="doctornameforprofile">Admin</span>
+                        </a>
+                    </li>
+                </ul>
+                <div class="dropdown mobile-user-menu float-right">
+                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" href="login.html">Logout</a>
                     </div>
+                </div>
+            </div>
+            <div class="sidebar" id="sidebar">
+                <div class="sidebar-inner slimscroll">
+                    <div id="sidebar-menu" class="sidebar-menu">
+                        <ul>
+                            <li>
+                                <a style="cursor: pointer;" onclick="App.viewProfileofDoctor()"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
+                            </li>
+                            <li>
+                                <a style="cursor: pointer;" onclick="App.ViewPatientsByDoctor()"><i class="fa fa-wheelchair"></i> <span>Patient Files</span></a>
+                            </li>
+                            <li>
+                                <a style="cursor: pointer;" onclick="App.ViewAppointmentsByDoctor()"><i class="fa fa-calendar"></i> <span>Appointments</span></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="page-wrapper">
+                <div class="content">
+                    <div class="row">
+                        <div class="col-sm-7 col-6">
+                            <h4 class="page-title">Doctor Profile</h4>
+                        </div>
 
-                    <div class="col-sm-5 col-6 text-right m-b-30">
-                        <a style="cursor: pointer;" onclick="App.showEditDoctorPage()" class="btn btn-primary btn-rounded"><i class="fa fa-plus"></i> Edit Doctor</a>
-                    </div>
-                </div>
-                <div class="card-box profile-header">
-                    <!-- doctor profile main page -->
-                    <div class="row" id="doctormain">
-                        <div class="col-md-12">
-                            <div class="profile-view">
-                                <div class="profile-img-wrap">
-                                    <div class="profile-img">
-                                        <a href="#"><img class="avatar" src="assets/img/user.jpg" alt=""></a>
-                                    </div>
-                                </div>
-                                <div class="profile-basic">
-                                    <div class="row">
-                                        
-                                        <div class="col-md-5">
-                                            <ul class="personal-info">
-                                                <li>
-                                                    <span class="title">First Name</span>
-                                                    <span class="text" id="docprofilename"><a href="#">770-889-6484</a></span>
-                                                </li>
-                                                <li>
-                                                    <span class="title">Birthday:</span>
-                                                    <span class="text" id="docprofileDob">3rd March</span>
-                                                </li>
-                                                <li>
-                                                    <span class="title">Phone</span>
-                                                    <span class="text" id="docprofilephone"><a href="#">770-889-6484</a></span>
-                                                </li>
-                                                <li>
-                                                    <span class="title">Hospital</span>
-                                                    <span class="text" id="docprofilehospitalname"><a href="#">cristinagroves@example.com</a></span>
-                                                </li>
-                                                <li>
-                                                    <span class="title">Address:</span>
-                                                    <span class="text" id="docprofileaddress">714 Burwell Heights Road, Bridge City, TX, 77611</span>
-                                                </li>
-                                                
-                                            </ul>
-                                        </div>
-                                        <div class="col-md-5">
-                                            <ul class="personal-info">
-                                                <li>
-                                                    <span class="title" >Specialization</span>
-                                                    <span class="text" id="docprofilespecialization"><a href="#">770-889-6484</a></span>
-                                                </li>
-                                                <li>
-                                                    <span class="title">Gender:</span>
-                                                    <span class="text" id="docprofilegender">Female</span>
-                                                </li>
-                                                <li>
-                                                    <span class="title">Email:</span>
-                                                    <span class="text" id="docprofileemail"><a href="#">cristinagroves@example.com</a></span>
-                                                </li>
-                                                <li>
-                                                    <span class="title">Registration ID</span>
-                                                    <span class="text" id="docprofileRegID">3rd March</span>
-                                                </li>
-                                                <li>
-                                                    <span class="title">Short Biography</span>
-                                                    <span class="text" id="docprofilebiodata">714 Burwell Heights Road, Bridge City, TX, 77611</span>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>                                    
-                            </div>                        
+                        <div class="col-sm-5 col-6 text-right m-b-30">
+                            <a style="cursor: pointer;" onclick="App.showEditDoctorPage()" class="btn btn-primary btn-rounded"><i class="fa fa-plus"></i> Edit Doctor</a>
                         </div>
                     </div>
-                    <!-- doctor main profile ends -->
-                    <!-- edit doctor page begins -->
-                    <div class="row" id="editdoctorpage" style="display: none;">
-                        <div class="content">
-                            <div class="row">
-                                <div class="col-lg-8 offset-lg-2">
-                                    <h4 class="page-title">Edit Doctor</h4>
+                    <div class="card-box profile-header">
+                        <!-- Doctor Profile Main Page Begins -->
+                        <div class="row" id="doctormain">
+                            <div class="col-md-12">
+                                <div class="profile-view">
+                                    <div class="profile-img-wrap">
+                                        <div class="profile-img">
+                                            <a href="#"><img class="avatar" src="assets/img/user.jpg" alt=""></a>
+                                        </div>
+                                    </div>
+                                    <div class="profile-basic">
+                                        <div class="row">
+
+                                            <div class="col-md-5">
+                                                <ul class="personal-info">
+                                                    <li>
+                                                        <span class="title">First Name</span>
+                                                        <span class="text" id="docprofilename"><a href="#">770-889-6484</a></span>
+                                                    </li>
+                                                    <li>
+                                                        <span class="title">Birthday:</span>
+                                                        <span class="text" id="docprofileDob">3rd March</span>
+                                                    </li>
+                                                    <li>
+                                                        <span class="title">Phone</span>
+                                                        <span class="text" id="docprofilephone"><a href="#">770-889-6484</a></span>
+                                                    </li>
+                                                    <li>
+                                                        <span class="title">Hospital</span>
+                                                        <span class="text" id="docprofilehospitalname"><a href="#">cristinagroves@example.com</a></span>
+                                                    </li>
+                                                    <li>
+                                                        <span class="title">Address:</span>
+                                                        <span class="text" id="docprofileaddress">714 Burwell Heights Road, Bridge City, TX, 77611</span>
+                                                    </li>
+
+                                                </ul>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <ul class="personal-info">
+                                                    <li>
+                                                        <span class="title">Specialization</span>
+                                                        <span class="text" id="docprofilespecialization"><a href="#">770-889-6484</a></span>
+                                                    </li>
+                                                    <li>
+                                                        <span class="title">Gender:</span>
+                                                        <span class="text" id="docprofilegender">Female</span>
+                                                    </li>
+                                                    <li>
+                                                        <span class="title">Email:</span>
+                                                        <span class="text" id="docprofileemail"><a href="#">cristinagroves@example.com</a></span>
+                                                    </li>
+                                                    <li>
+                                                        <span class="title">Registration ID</span>
+                                                        <span class="text" id="docprofileRegID">3rd March</span>
+                                                    </li>
+                                                    <li>
+                                                        <span class="title">Short Biography</span>
+                                                        <span class="text" id="docprofilebiodata">714 Burwell Heights Road, Bridge City, TX, 77611</span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-lg-8 offset-lg-2">
-                                   
+                        </div>
+                        <!-- Doctor Main Profile Ends -->
+
+                        <!-- Edit Doctor Page Begins -->
+                        <div class="row" id="editdoctorpage" style="display: none;">
+                            <div class="content">
+                                <div class="row">
+                                    <div class="col-lg-8 offset-lg-2">
+                                        <h4 class="page-title">Edit Doctor</h4>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-8 offset-lg-2">
                                         <div class="row">
-                                            <!-- <div class="col-sm-12">
-                                                <div class="form-group">
-                                                    <label>Profile Photo</label>
-                                                    <div class="profile-upload">
-                                                        <div class="upload-img">
-                                                            <img alt="" src="assets/img/user.jpg">
-                                                        </div>
-                                                        <div class="upload-input">
-                                                            <input type="file" class="form-control">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div> -->
                                             <div class="col-sm-6">
                                                 <div class="form-group">
                                                     <label>First Name <span class="text-danger">*</span></label>
@@ -1436,7 +1262,7 @@
                                                 <div class="form-group">
                                                     <label>Date of Birth</label>
                                                     <div class="cal-icon">
-                                                        <input type="text" class="form-control datetimepicker"id="editdoctordob">
+                                                        <input type="text" class="form-control datetimepicker" id="editdoctordob">
                                                     </div>
                                                 </div>
                                             </div>
@@ -1466,7 +1292,7 @@
                                                     <label>Email <span class="text-danger">*</span></label>
                                                     <input class="form-control" type="email" id="editdoctoremail">
                                                 </div>
-                                            </div>  
+                                            </div>
                                             <div class="col-sm-12">
                                                 <div class="form-group">
                                                     <label>Hospital<span class="text-danger">*</span></label>
@@ -1497,9 +1323,9 @@
                                                     <div class="col-sm-6 col-md-6 col-lg-3">
                                                         <div class="form-group">
                                                             <div class="form-group">
-                                                            <label>Country</label>
-                                                            <input type="text" class="form-control" id="editdoctorcountry">
-                                                        </div>
+                                                                <label>Country</label>
+                                                                <input type="text" class="form-control" id="editdoctorcountry">
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-6 col-md-6 col-lg-3">
@@ -1511,9 +1337,9 @@
                                                     <div class="col-sm-6 col-md-6 col-lg-3">
                                                         <div class="form-group">
                                                             <div class="form-group">
-                                                            <label>City</label>
-                                                            <input type="text" class="form-control" id="editdoctorcity">
-                                                        </div>
+                                                                <label>City</label>
+                                                                <input type="text" class="form-control" id="editdoctorcity">
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-6 col-md-6 col-lg-3">
@@ -1530,70 +1356,67 @@
                                             <textarea class="form-control" rows="3" cols="30" id="editdoctorbiodata"></textarea>
                                         </div>
                                         <div class="m-t-20 text-center">
-                                            <button class="btn btn-primary" onclick="App.updateDoctor()" >Save</button>
+                                            <button class="btn btn-primary" onclick="App.updateDoctor()">Save</button>
                                         </div>
-                                  
+
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <!-- edit doctor page ends -->
-                    <!-- View patients begins -->
-                    <div class="row" id="viewPatientsbydoctor" style="display: none;" >
-                        <div class="col-md-12">
-                            <div class="table-responsive">
-                                <table class="table table-striped custom-table">
-                                    <thead>
-                                        <tr>
-                                            <th>ID</th>
-                                            <th>Patient Name</th>
-                                            <th>Patient Address</th>
-                                            <th>File view</th>
-                                            <!-- <th>Status</th>
-                                            <th class="text-right">Action</th> -->
-                                        </tr>
-                                    </thead>
-                                    <tbody id="viewFilesbyDoctor">
-                                        
-                                    </tbody>
-                                </table>
-                            </div> 
-                        </div>
-                    </div>          
-                 <!-- patient  View ends -->
-                 <!-- View appointments begins -->
-                 <div class="row" id="viewAppointmentsbydoctorpage" style="display: none;" >
-                    <div class="col-md-12">
-                        <div class="table-responsive">
-                            <table class="table table-striped custom-table">
-                                <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Patient Name</th>
-                                        <th>DoB</th>
-                                        <th>Appointment Date</th>
-                                        <th>Appointment Time</th>
-                                        <!-- <th>Status</th>
-                                        <th class="text-right">Action</th> -->
-                                    </tr>
-                                </thead>
-                                <tbody id="viewApponitmentsbyDoctor">
-                                    
-                                </tbody>
-                            </table>
-                        </div> 
-                    </div>
-                </div>          
-             <!-- appointment  View ends -->
+                        <!-- Edit Doctor Page Ends -->
 
+                        <!-- View Patients Begins -->
+                        <div class="row" id="viewPatientsbydoctor" style="display: none;">
+                            <div class="col-md-12">
+                                <div class="table-responsive">
+                                    <table class="table table-striped custom-table">
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Patient Name</th>
+                                                <th>Patient Address</th>
+                                                <th>File view</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="viewFilesbyDoctor">
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Patient View Ends -->
+
+                        <!-- View Patient Appointments Begins -->
+                        <div class="row" id="viewAppointmentsbydoctorpage" style="display: none;">
+                            <div class="col-md-12">
+                                <div class="table-responsive">
+                                    <table class="table table-striped custom-table">
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Patient Name</th>
+                                                <th>DoB</th>
+                                                <th>Appointment Date</th>
+                                                <th>Appointment Time</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="viewApponitmentsbyDoctor">
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Patient Appointment  View Ends -->
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    </div>
-     <!-- Doctor dashboard Ends -->
+    <!-- Doctor Dashboard Ends -->
 
-      <!-- Patient dashboard begins -->
+    <!-- Patient Dashboard Begins -->
     <div id="dashboardpatient" style="display: none;">
         <div class="main-wrapper">
             <div class="header">
@@ -1611,9 +1434,6 @@
                                 <span class="status online"></span></span>
                             <span id="patientname"></span>
                         </a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="login.html">Logout</a>
-                        </div>
                     </li>
                 </ul>
                 <div class="dropdown mobile-user-menu float-right">
@@ -1631,31 +1451,25 @@
                                 <a style="cursor: pointer;" onclick="App.showDashboardByPatient()"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
                             </li>
                             <li>
-                                <a href="healthcare-provider.html" style="pointer-events: none;color: #ccc;"><i class="fa fa-hospital-o"></i> <span>Healthcare Providers</span></a>
-                            </li>
-                            <li>
-                                <a href="doctors.html" style="pointer-events: none;color: #ccc;"><i class="fa fa-user-md"></i> <span>Doctors</span></a>
-                            </li>
-                            <li >
-                                <a href="patients.html" style="pointer-events: none;color: #ccc;"><i class="fa fa-wheelchair" ></i> <span>Patients</span></a>
+                                <a  style="cursor: pointer;" onclick="App.showDoctorsByPatient()"><i class="fa fa-user-md"></i> <span>Doctors</span></a>
                             </li>
                             <li>
                                 <a style="cursor: pointer;" onclick="App.ViewAppointmentByPatient()"><i class="fa fa-calendar" ></i> <span>Appointments</span></a>
                             </li>
                             <li>
-                                <a href="insurance-provider.html" style="pointer-events: none;color: #ccc;"><i class="fa fa-hospital-o" ></i> <span>Insurance Providers</span></a>
-                            </li>					                        
+                                <a style="cursor: pointer;" onclick="App.showInsuranceProvidersByPatient()"><i class="fa fa-hospital-o" ></i> <span>Insurance Providers</span></a>
+                            </li>
                         </ul>
                     </div>
                 </div>
             </div>
-            <div class="page-wrapper" >
+            <div class="page-wrapper">
                 <div class="content">
                     <div class="row">
                         <div class="col-sm-7 col-6">
                             <h4 class="page-title">Patient Profile</h4>
                         </div>
-    
+
                         <div class="col-sm-5 col-6 text-right m-b-30">
                             <button data-toggle="modal" data-target="#share_files" class="btn btn-primary btn-rounded">Share</button>
                             <a style="cursor: pointer;" onclick="App.showPatientEditPage()" class="btn btn-primary btn-rounded"><i class="fa fa-plus"></i> Edit Patient</a>
@@ -1697,7 +1511,7 @@
                                                         <span class="title">Address:</span>
                                                         <span class="text" id="patprofileaddress">714 Burwell Heights Road, Bridge City, TX, 77611</span>
                                                     </li>
-    
+
                                                 </ul>
                                             </div>
                                             <div class="col-md-6">
@@ -1720,19 +1534,19 @@
                                                     </li>
                                                     <li>
                                                         <span class="title">My File</span>
-                                                        <span class="text"><a href="google.com" id="patprofilefilelink"></a></span>                                                        
+                                                        <span class="text"><a href="google.com" id="patprofilefilelink"></a></span>
                                                     </li>
                                                 </ul>
                                             </div>
                                         </div>
                                     </div>
-                                </div>                        
+                                </div>
                             </div>
                         </div>
-                         <!-- patient home page Ends -->
-                         <!-- patient Edit page begins -->
+                        <!-- Patient Home Page Ends -->
 
-                         <div class="row" id="editpatientpage" style="display: none;">
+                        <!-- Patient Edit Page Begins -->
+                        <div class="row" id="editpatientpage" style="display: none;">
                             <div class="content">
                                 <div class="row">
                                     <div class="col-lg-8 offset-lg-2">
@@ -1741,113 +1555,113 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-8 offset-lg-2">
-                                      
-                                            <div class="row">
-                
-                                                <div class="col-sm-6">
-                                                    <div class="form-group">
-                                                        <label>First Name <span class="text-danger">*</span></label>
-                                                        <input class="form-control" type="text" id="editpatientfname">
+
+                                        <div class="row">
+
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>First Name <span class="text-danger">*</span></label>
+                                                    <input class="form-control" type="text" id="editpatientfname">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>Last Name</label>
+                                                    <input class="form-control" type="text" id="editpatientlname">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>Date of Birth</label>
+                                                    <div class="cal-icon">
+                                                        <input type="text" class="form-control datetimepicker" id="editpatientdob">
                                                     </div>
                                                 </div>
-                                                <div class="col-sm-6">
-                                                    <div class="form-group">
-                                                        <label>Last Name</label>
-                                                        <input class="form-control" type="text" id="editpatientlname">
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <div class="form-group">
-                                                        <label>Date of Birth</label>
-                                                        <div class="cal-icon">
-                                                            <input type="text" class="form-control datetimepicker" id="editpatientdob">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <div class="form-group gender-select">
-                                                        <label class="gen-label">Gender:</label>
-                                                        <div class="form-check-inline">
-                                                            <label class="form-check-label">
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group gender-select">
+                                                    <label class="gen-label">Gender:</label>
+                                                    <div class="form-check-inline">
+                                                        <label class="form-check-label">
                                                                 <input type="radio" id="editpatientmale" name="editpatientgender" class="form-check-input">Male
                                                             </label>
-                                                        </div>
-                                                        <div class="form-check-inline">
-                                                            <label class="form-check-label">
+                                                    </div>
+                                                    <div class="form-check-inline">
+                                                        <label class="form-check-label">
                                                                 <input type="radio"  id="editpatientfemale" name="editpatientgender" class="form-check-input">Female
                                                             </label>
-                                                        </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-sm-6">
-                                                    <div class="form-group">
-                                                        <label>Phone </label>
-                                                        <input class="form-control" type="text" id="editpatientphone">
-                                                    </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>Phone </label>
+                                                    <input class="form-control" type="text" id="editpatientphone">
                                                 </div>
-                                                <div class="col-sm-6">
-                                                    <div class="form-group">
-                                                        <label>Email <span class="text-danger">*</span></label>
-                                                        <input class="form-control" type="email" id="editpatientemail">
-                                                    </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>Email <span class="text-danger">*</span></label>
+                                                    <input class="form-control" type="email" id="editpatientemail">
                                                 </div>
-                                                <div class="col-sm-6">
-                                                    <div class="form-group">
-                                                        <label>Insurance ID<span class="text-danger">*</span></label>
-                                                        <input class="form-control" type="text" id="editpatientinsuid">
-                                                    </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>Insurance ID<span class="text-danger">*</span></label>
+                                                    <input class="form-control" type="text" id="editpatientinsuid">
                                                 </div>
-                                                <div class="col-sm-6">
-                                                    <div class="form-group">
-                                                        <label>Insurance Provider<span class="text-danger">*</span></label>
-                                                        <select class="form-control" id="editpatientinsuranceProviderSelect"></select>
-                                                    </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>Insurance Provider<span class="text-danger">*</span></label>
+                                                    <select class="form-control" id="editpatientinsuranceProviderSelect"></select>
                                                 </div>
-                                                <div class="col-sm-12">
-                                                    <div class="form-group">
-                                                        <label>Family Doctor<span class="text-danger">*</span></label>
-                                                        <select class="form-control" id="editpatientdoctorSelect"></select>
-                                                    </div>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <label>Family Doctor<span class="text-danger">*</span></label>
+                                                    <select class="form-control" id="editpatientdoctorSelect"></select>
                                                 </div>
-                                                <div class="col-sm-12">
-                                                    <div class="row">
-                                                        <div class="col-sm-12">
-                                                            <div class="form-group">
-                                                                <label>Address</label>
-                                                                <input type="text" class="form-control " id="editpatientaddress">
-                                                            </div>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <div class="form-group">
+                                                            <label>Address</label>
+                                                            <input type="text" class="form-control " id="editpatientaddress">
                                                         </div>
-                                                        <div class="col-sm-6 col-md-6 col-lg-3">
-                                                            <div class="form-group">
-                                                                <label>Country</label>
-                                                                <input type="text" class="form-control" id="editpatientcountry">
-                                                            </div>
+                                                    </div>
+                                                    <div class="col-sm-6 col-md-6 col-lg-3">
+                                                        <div class="form-group">
+                                                            <label>Country</label>
+                                                            <input type="text" class="form-control" id="editpatientcountry">
                                                         </div>
-                                                        <div class="col-sm-6 col-md-6 col-lg-3">
-                                                            <div class="form-group">
-                                                                <label>State</label>
-                                                                <input type="text" class="form-control " id="editpatientstate">
-                                                            </div>
+                                                    </div>
+                                                    <div class="col-sm-6 col-md-6 col-lg-3">
+                                                        <div class="form-group">
+                                                            <label>State</label>
+                                                            <input type="text" class="form-control " id="editpatientstate">
                                                         </div>
-                                                        <div class="col-sm-6 col-md-6 col-lg-3">
-                                                            <div class="form-group">
-                                                                <label>City</label>
-                                                                <input type="text" class="form-control " id="editpatientcity">
-                                                            </div>
+                                                    </div>
+                                                    <div class="col-sm-6 col-md-6 col-lg-3">
+                                                        <div class="form-group">
+                                                            <label>City</label>
+                                                            <input type="text" class="form-control " id="editpatientcity">
                                                         </div>
-                                                        <div class="col-sm-6 col-md-6 col-lg-3">
-                                                            <div class="form-group">
-                                                                <label>Postal Code</label>
-                                                                <input type="text" class="form-control" id="editpatientpostalcode">
-                                                            </div>
+                                                    </div>
+                                                    <div class="col-sm-6 col-md-6 col-lg-3">
+                                                        <div class="form-group">
+                                                            <label>Postal Code</label>
+                                                            <input type="text" class="form-control" id="editpatientpostalcode">
                                                         </div>
-                                                        <div class="col-sm-12">
-                                                            <div class="form-group">
-                                                                <label>Upload File</label>
-                                                                <input type="file" class="form-control btn-rounded" onchange="App.editpatientFile(this)">
-                                                            </div>
+                                                    </div>
+                                                    <div class="col-sm-12">
+                                                        <div class="form-group">
+                                                            <label>Upload File</label>
+                                                            <input type="file" class="form-control btn-rounded" onchange="App.editpatientFile(this)">
                                                         </div>
-                                                        <!-- <div class="col-sm-12">
+                                                    </div>
+                                                    <!-- <div class="col-sm-12">
                                                             <div class="form-group">
                                                                 <label>Medical Files</label>
                                                                 <div class="profile-upload">
@@ -1867,99 +1681,148 @@
                                                                 </div>
                                                             </div>
                                                         </div> -->
-                                                    </div>
                                                 </div>
                                             </div>
-                                            <div class="m-t-20 text-center">
-                                                <button class="btn btn-primary " onclick="App.updatePatient()">Save</button>
-                                            </div>
-                                        
+                                        </div>
+                                        <div class="m-t-20 text-center">
+                                            <button class="btn btn-primary " onclick="App.updatePatient()">Save</button>
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>
-                         </div>
-                         <!-- patient Edit page ends -->
-                        <!-- Patient booking begining -->
+                        </div>
+                        <!-- Patient Edit Page Ends -->
+
+                        <!-- Patient Appointment Booking Begining -->
                         <div class="row" id="patientbooking" style="display: none;">
                             <div class="col-md-12">
-                                   <table class="table">
-                                       <tr>
-                                           <td>Doctor Name</td>
-                                           <td><select  class="form-control" id="selectDoctorforBookingbypatient"></select> </td>
-                                       </tr>
-                                       <tr>                                           
-                                          <td>Date</td>
+                                <table class="table">
+                                    <tr>
+                                        <td>Doctor Name</td>
+                                        <td><select class="form-control" id="selectDoctorforBookingbypatient"></select> </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Date</td>
                                         <td><input class="form-control" type="date" id="bookingdatebypatient"></td>
-                                        </tr>
-                                        <tr>                                           
-                                            <td>Time</td>
-                                          <td> <input class="form-control" type="time" id="bookingtimebypatient"></td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="2" align="center"> <button class="btn btn-primary submit-btn" onclick="App.createAppointmentByPatient()">Create Appointment</button></td>
-                                        </tr>
-                                   </table>          
-                            </div>
-                        </div>          
-                     <!-- patient booking ends -->
-                       <!-- Patient booking View begining -->
-                     <div class="row" id="patientbookingView" style="display: none;">
-                        <div class="col-md-12">
-                            <div class="table-responsive">
-                                <table class="table table-striped custom-table">
-                                    <thead>
-                                        <tr>
-                                            <th>Appointment ID</th>
-                                            <th>Patient Name</th>
-                                            <th>Age</th>
-                                            <th>Doctor Name</th>
-                                            <th>Department</th>
-                                            <th>Appointment Date</th>
-                                            <th>Appointment Time</th>
-                                            <!-- <th>Status</th>
-                                            <th class="text-right">Action</th> -->
-                                        </tr>
-                                    </thead>
-                                    <tbody id="viewAppointmentsByPatient">
-                                        
-                                    </tbody>
+                                    </tr>
+                                    <tr>
+                                        <td>Time</td>
+                                        <td> <input class="form-control" type="time" id="bookingtimebypatient"></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" align="center"> <button class="btn btn-primary submit-btn" onclick="App.createAppointmentByPatient()">Create Appointment</button></td>
+                                    </tr>
                                 </table>
-                            </div> 
-                        </div>
-                    </div>          
-                 <!-- patient booking View ends -->
-                    </div>
-                    </div>
-
-                </div>  
-                
-                <div id="share_files" class="modal fade" role="dialog">
-                    <div class="modal-dialog modal-dialog-centered modal-lg">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h3 class="modal-title">Share File</h3>
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
                             </div>
-                            <div class="modal-body">
-                                <div class="form-group">
-                                    <label>Share With</label>
-                                    <select class="form-control" id="doctorSelectforShareFiles"></select>
+                        </div>
+                        <!-- Patient Appointment Booking Ends -->
+
+                        <!-- Patient Appointment Booking View begining -->
+                        <div class="row" id="patientbookingView" style="display: none;">
+                            <div class="col-md-12">
+                                <div class="table-responsive">
+                                    <table class="table table-striped custom-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Appointment ID</th>
+                                                <th>Patient Name</th>
+                                                <th>Age</th>
+                                                <th>Doctor Name</th>
+                                                <th>Department</th>
+                                                <th>Appointment Date</th>
+                                                <th>Appointment Time</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="viewAppointmentsByPatient">
+
+                                        </tbody>
+                                    </table>
                                 </div>
-                                <div class="m-t-50   text-center">
-                                    <button class="btn btn-primary submit-btn" onclick="App.shareFileToDoctor()">Share</button>
+                            </div>
+                        </div>
+                        <!-- Patient Appointment Booking View Ends -->
+                        <!-- Patient Doctors View begining -->
+                        <div class="row" id="patientalldoctorsView" style="display: none;">
+                            <div class="col-md-12">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <tr>
+                                            <td colspan="5" align="center">
+                                                <h3>All Doctors</h3>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Name</th>
+                                            <th>Registration No</th>
+                                            <th>Specialization</th>
+                                            <th>Hospital</th>
+                                        </tr>
+                                        <tbody id="displayalldoctorsbypatient">
+            
+                                        </tbody>
+                                    </table>
                                 </div>
+                            </div>
+                        </div>
+                        <!-- Patient Doctors View  Ends -->
+                         <!-- Patient Insurance View begining -->
+                         <div class="row" id="patientallinsuranceView" style="display: none;">
+                            <div class="col-md-12">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <tr>
+                                            <td colspan="3" align="center">
+                                                <h3>All Insurance Providers</h3>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Name</th>
+                                            <th>Registration No</th>
+                                        </tr>
+                                        <tbody id="displayallinsurancebyPatient">
+            
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Patient insurance View  Ends -->
+
+
+
+                    </div>
+                </div>
+            </div>
+            <div id="share_files" class="modal fade" role="dialog">
+                <div class="modal-dialog modal-dialog-centered modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 class="modal-title">Share File</h3>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label>Share With</label>
+                                <select class="form-control" id="doctorSelectforShareFiles"></select>
+                            </div>
+                            <div class="m-t-50   text-center">
+                                <button class="btn btn-primary submit-btn" onclick="App.shareFileToDoctor()">Share</button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- Patient main profile ends -->
-           
         </div>
-    </div>
-     <!-- Patient dashboard Ends -->
+        <!-- Patient Main Profile Ends -->
 
-      <!-- Insurance dashboard begins -->
+    </div>
+    </div>
+    <!-- Patient Dashboard Ends -->
+
+    <!-- Insurance Dashboard Begins -->
     <div id="dashboardinsuranceprovider" style="display: none;">
         <div class="main-wrapper">
             <div class="header">
@@ -1977,9 +1840,6 @@
                                 <span class="status online"></span></span>
                             <span id="insuranceprofilenam"></span>
                         </a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="login.html">Logout</a>
-                        </div>
                     </li>
                 </ul>
                 <div class="dropdown mobile-user-menu float-right">
@@ -1997,20 +1857,8 @@
                                 <a style="cursor: pointer;" onclick="App.viewProfileofIns()"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
                             </li>
                             <li>
-                                <a href="healthcare-provider.html" style="pointer-events: none;color: #ccc;"><i class="fa fa-hospital-o"></i> <span>Healthcare Providers</span></a>
+                                <a style="cursor: pointer;" onclick="App.viewPatientsByIns()"><i class="fa fa-wheelchair"></i> <span>Insurance Holders</span></a>
                             </li>
-                            <li>
-                                <a href="doctors.html" style="pointer-events: none;color: #ccc;"><i class="fa fa-user-md"></i> <span>Doctors</span></a>
-                            </li>
-                            <li>
-                                <a style="cursor: pointer;" onclick="App.viewPatientsByIns()"><i class="fa fa-wheelchair"></i> <span>Patients</span></a>
-                            </li>
-                            <li>
-                                <a href="appointments.html" style="pointer-events: none;color: #ccc;"><i class="fa fa-calendar"></i> <span>Appointments</span></a>
-                            </li>
-                            <li class="active">
-                                <a href="insurance-provider.html" style="pointer-events: none;color: #ccc;"><i class="fa fa-hospital-o"></i> <span>Insurance Providers</span></a>
-                            </li>					                        
                         </ul>
                     </div>
                 </div>
@@ -2021,7 +1869,7 @@
                         <div class="col-sm-7 col-6">
                             <h4 class="page-title">Insurance Profile</h4>
                         </div>
-    
+
                         <div class="col-sm-5 col-6 text-right m-b-30">
                             <a style="cursor: pointer;" onclick="App.showEditInsurancePage()" class="btn btn-primary btn-rounded"><i class="fa fa-plus"></i> Edit Insurance</a>
                         </div>
@@ -2075,7 +1923,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>                        
+                                </div>
                             </div>
                         </div>
                         <div class="row" id="editInsurancePage" style="display: none;">
@@ -2087,120 +1935,121 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-8 offset-lg-2">
-                                        
-                                            <div class="row">
-                                                <div class="col-sm-6">
-                                                    <div class="form-group">
-                                                        <label>Insurance Name<span class="text-danger">*</span></label>
-                                                        <input class="form-control" type="text" id="editinsurancename">
-                                                    </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>Insurance Name<span class="text-danger">*</span></label>
+                                                    <input class="form-control" type="text" id="editinsurancename">
                                                 </div>
-                                                <div class="col-sm-6">
-                                                    <div class="form-group">
-                                                        <label>Insurance Registration ID<span class="text-danger">*</span></label>
-                                                        <input class="form-control" type="text" id="editinsuranceregno">
-                                                    </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>Insurance Registration ID<span class="text-danger">*</span></label>
+                                                    <input class="form-control" type="text" id="editinsuranceregno">
                                                 </div>
-                                                <div class="col-sm-4">
-                                                    <div class="form-group">
-                                                        <label>Website<span class="text-danger">*</span></label>
-                                                        <input class="form-control" type="user-link" id="editinsurancewebsite">
-                                                    </div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <div class="form-group">
+                                                    <label>Website<span class="text-danger">*</span></label>
+                                                    <input class="form-control" type="user-link" id="editinsurancewebsite">
                                                 </div>
-                                                <div class="col-sm-4">
-                                                    <div class="form-group">
-                                                        <label>Phone </label>
-                                                        <input class="form-control" type="text" id="editinsurancephone">
-                                                    </div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <div class="form-group">
+                                                    <label>Phone </label>
+                                                    <input class="form-control" type="text" id="editinsurancephone">
                                                 </div>
-                                                <div class="col-sm-4">
-                                                    <div class="form-group">
-                                                        <label>Email <span class="text-danger">*</span></label>
-                                                        <input class="form-control" type="email" id="editinsuranceemail">
-                                                    </div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <div class="form-group">
+                                                    <label>Email <span class="text-danger">*</span></label>
+                                                    <input class="form-control" type="email" id="editinsuranceemail">
                                                 </div>
-                                                <div class="col-sm-12">
-                                                    <div class="row">
-                                                        <div class="col-sm-12">
-                                                            <div class="form-group">
-                                                                <label>Address</label>
-                                                                <input type="text" class="form-control" id="editinsuranceaddress">
-                                                            </div>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <div class="form-group">
+                                                            <label>Address</label>
+                                                            <input type="text" class="form-control" id="editinsuranceaddress">
                                                         </div>
-                                                        <div class="col-sm-6 col-md-6 col-lg-3">
-                                                            <div class="form-group">
-                                                                <label>Country</label>
-                                                                <input type="text" class="form-control" id="editinsurancecountry">
-                                                            </div>
+                                                    </div>
+                                                    <div class="col-sm-6 col-md-6 col-lg-3">
+                                                        <div class="form-group">
+                                                            <label>Country</label>
+                                                            <input type="text" class="form-control" id="editinsurancecountry">
                                                         </div>
-                                                        <div class="col-sm-6 col-md-6 col-lg-3">
-                                                            <div class="form-group">
-                                                                <label>State</label>
-                                                                <input type="text" class="form-control" id="editinsurancestate">
-                                                            </div>
+                                                    </div>
+                                                    <div class="col-sm-6 col-md-6 col-lg-3">
+                                                        <div class="form-group">
+                                                            <label>State</label>
+                                                            <input type="text" class="form-control" id="editinsurancestate">
                                                         </div>
-                                                        <div class="col-sm-6 col-md-6 col-lg-3">
-                                                            <div class="form-group">
-                                                                <label>City</label>
-                                                                <input type="text" class="form-control" id="editinsurancecity">
-                                                            </div>
+                                                    </div>
+                                                    <div class="col-sm-6 col-md-6 col-lg-3">
+                                                        <div class="form-group">
+                                                            <label>City</label>
+                                                            <input type="text" class="form-control" id="editinsurancecity">
                                                         </div>
-                                                        <div class="col-sm-6 col-md-6 col-lg-3">
-                                                            <div class="form-group">
-                                                                <label>Postal Code</label>
-                                                                <input type="text" class="form-control" id="editinsurancepostalcode">
-                                                            </div>
+                                                    </div>
+                                                    <div class="col-sm-6 col-md-6 col-lg-3">
+                                                        <div class="form-group">
+                                                            <label>Postal Code</label>
+                                                            <input type="text" class="form-control" id="editinsurancepostalcode">
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="form-group">
-                                                <label>Insurance Description</label>
-                                                <textarea class="form-control" rows="3" cols="30" id="editinsurancedescription"></textarea>
-                                            </div>
-                                            <div class="m-t-20 text-center">
-                                                <button class="btn btn-primary " onclick="App.updateInsurance();">Save</button>
-                                            </div>
-                                       
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Insurance Description</label>
+                                            <textarea class="form-control" rows="3" cols="30" id="editinsurancedescription"></textarea>
+                                        </div>
+                                        <div class="m-t-20 text-center">
+                                            <button class="btn btn-primary " onclick="App.updateInsurance();">Save</button>
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <!-- View Insurance Holders - Patients Begins -->
                         <div class="row" id="viewpatientsbyinsurance" style="display: none;">
-                                <table class="table">
-                                    <tr>
-                                        <th>Patient ID</th>
-                                        <th>Patient Name</th>
-                                        <th>Patient DoB</th>
-                                        <th>Isurance ID</th> 
-                                    </tr>
-                                    <tbody id="diaplaypatientdetailsbyinsu">
+                            <table class="table">
+                                <tr>
+                                    <th>Patient ID</th>
+                                    <th>Patient Name</th>
+                                    <th>Patient DoB</th>
+                                    <th>Isurance ID</th>
+                                </tr>
+                                <tbody id="diaplaypatientdetailsbyinsu">
 
-                                    </tbody>
-                                </table>
+                                </tbody>
+                            </table>
                         </div>
+                        <!-- View Insurance Holders - Patients Ends -->
                     </div>
                 </div>
             </div>
         </div>
     </div>
-     <!-- Insurance dashboard Ends -->
+    <!-- Insurance Dashboard Ends -->
+
     <div class="sidebar-overlay" data-reff=""></div>
     <script src="assets/js/jquery-3.2.1.min.js"></script>
-	<script src="assets/js/popper.min.js"></script>
+    <script src="assets/js/popper.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
     <script src="assets/js/jquery.slimscroll.js"></script>
-    
+
     <script src="assets/js/ipfs-mini.js"></script>
     <!-- <script src="assets/js/Chart.bundle.js"></script>
     <script src="assets/js/chart.js"></script> -->
     <script src="assets/js/app.js"></script>
     <script type="text/javascript" src="assets/js/appnew.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js/dist/web3.min.js"></script>    
+    <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js/dist/web3.min.js"></script>
     <script src="assets/js/truffle-contract.js"></script>
-    
-    
-    
+
     <!-- <script>
         function addRow(tableID) {
 
@@ -2231,9 +2080,7 @@
         newcell.childNodes[0].selectedIndex = 0;
         break;
         case "button":
-            
         newcell.childNodes[0].onclick = "App.fileUploadByPatient(0)";
-       
         //window.alert(newcell.childNodes[0]);
         console.log(newcell.childNodes[0])
         break;
@@ -2258,7 +2105,6 @@
         rowCount--;
         i--;
         }
-
 
         }
         }catch(e) {
